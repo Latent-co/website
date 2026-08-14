@@ -10,11 +10,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Latent — Make your effort visible",
+  title: "Latent: Make your effort visible",
   description:
     "Latent turns the work you do into something you can see, share, and build on. Put your phone down, do the work, and watch your effort compound.",
   openGraph: {
-    title: "Latent — Make your effort visible",
+    title: "Latent: Make your effort visible",
     description:
       "Put your phone down. Do the work. Latent turns your effort into something you can see, share, and build on.",
     type: "website",

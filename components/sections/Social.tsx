@@ -21,8 +21,8 @@ export default function Social() {
             Work hits different when someone sees it.
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 max-w-md text-lg text-paper-dim">
-            Not “look at me.” More like “I showed up.” Friends see the session —
-            the real timelapse — not a selfie.
+            Not “look at me.” More like “I showed up.” Friends see the session,
+            the real timelapse, not a selfie.
           </motion.p>
           <motion.div
             variants={fadeUp}
@@ -43,7 +43,7 @@ export default function Social() {
         >
           <TiltPhone
             src="/screen-feed.png"
-            alt="The Latent feed — a friend's session with its timelapse"
+            alt="The Latent feed: a friend's session with its timelapse"
             strength={10}
             className="w-[270px] md:w-[300px]"
           />

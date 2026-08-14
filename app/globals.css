@@ -162,6 +162,53 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.9);
 }
 
+/* ── Privacy / legal prose ─────────────────────────────────────────────── */
+.privacy-prose p {
+  margin-top: 1rem;
+  color: #8a857b; /* paper-dim */
+  line-height: 1.75;
+}
+.privacy-prose h2 {
+  margin-top: 2.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f5efe1; /* paper */
+}
+.privacy-prose h3 {
+  margin-top: 1.75rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #f5efe1;
+}
+.privacy-prose ul {
+  margin-top: 1rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+  color: #8a857b;
+}
+.privacy-prose li {
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+.privacy-prose li::marker {
+  color: #574615; /* gold-dim */
+}
+.privacy-prose strong {
+  color: #f5efe1;
+  font-weight: 600;
+}
+.privacy-prose a {
+  color: #f0c22b; /* gold */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease;
+}
+.privacy-prose a:hover {
+  color: #f7d874; /* gold-soft */
+}
+
 ::selection {
   background: rgba(240, 194, 43, 0.28);
   color: #f5efe1;

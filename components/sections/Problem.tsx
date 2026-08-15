@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const lines = [
   "Hours at your desk disappear.",
@@ -23,30 +24,23 @@ export default function Problem() {
           Most work is invisible.
         </motion.h2>
 
-        {/* Each line fades up slowly on its own as it scrolls into view. */}
-        <div className="mx-auto mt-20 max-w-4xl space-y-12 md:mt-28 md:space-y-20">
-          {lines.map((l) => (
-            <motion.p
-              key={l}
-              initial={{ opacity: 0, y: 34 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-25%" }}
-              transition={{ duration: 1.3, ease: EASE }}
-              className="text-balance text-3xl font-medium leading-snug text-paper-dim md:text-5xl"
-            >
-              {l}
-            </motion.p>
-          ))}
-        </div>
+        {/* The lines sit dim and brighten letter by letter as they scroll
+            up through the viewport. */}
+        <ScrollReveal
+          lines={lines}
+          className="mx-auto mt-20 max-w-4xl space-y-12 md:mt-28 md:space-y-20"
+          lineClassName="text-balance text-3xl font-medium leading-snug md:text-5xl"
+        />
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-20%" }}
           transition={{ duration: 1.1, ease: EASE }}
-          className="mt-20 text-2xl font-semibold tracking-tight text-paper md:mt-28 md:text-3xl"
+          className="mt-20 text-4xl font-semibold tracking-tight text-paper sm:text-5xl md:mt-28 md:text-6xl"
         >
-          Latent makes them <span className="text-gold">visible</span>.
+          Latent makes them{" "}
+          <span className="font-kalix italic text-gold">visible</span>.
         </motion.p>
       </div>
     </section>

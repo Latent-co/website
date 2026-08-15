@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import TiltPhone from "@/components/ui/TiltPhone";
 import AppStoreButton from "@/components/ui/AppStoreButton";
 import { EASE } from "@/lib/motion";
@@ -30,6 +31,26 @@ export default function Hero() {
       ref={ref}
       className="relative overflow-hidden px-6 pb-28 pt-40 md:pb-36 md:pt-48"
     >
+      {/* Painterly cloud backdrop, dimmed and warmed to sit under the theme
+          and dissolve into the near-black page below. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        <Image
+          src="/hero-clouds.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-[0.6] [filter:saturate(0.88)_brightness(0.82)_contrast(1.03)]"
+        />
+        {/* Warm tint nudges the palette toward the gold/cream theme. */}
+        <div className="absolute inset-0 bg-[#1a1206] opacity-50 mix-blend-soft-light" />
+        {/* Darker at the top for headline contrast, solid ink at the bottom
+            so it blends into the next section. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/25 to-ink" />
+        {/* Nav edge fade. */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink to-transparent" />
+      </div>
+
       <motion.div
         variants={container}
         initial="hidden"

@@ -10,19 +10,10 @@ const groups = [
     ],
   },
   {
-    heading: "Company",
-    links: [
-      { label: "Manifesto", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
-    ],
-  },
-  {
     heading: "Legal",
     links: [
       { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "Contact", href: "mailto:info@latent.app" },
     ],
   },
 ];
@@ -31,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-ink-line px-6 py-16">
       <div className="mx-auto max-w-wrap">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr]">
           <div>
             <Wordmark />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper-dim">
@@ -46,16 +37,24 @@ export default function Footer() {
                 {g.heading}
               </h4>
               <ul className="mt-4 space-y-3">
-                {g.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      href={l.href}
-                      className="text-sm text-paper-dim transition-colors hover:text-gold"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
+                {g.links.map((l) => {
+                  const external = /^(mailto:|https?:)/.test(l.href);
+                  const cls =
+                    "text-sm text-paper-dim transition-colors hover:text-gold";
+                  return (
+                    <li key={l.label}>
+                      {external ? (
+                        <a href={l.href} className={cls}>
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link href={l.href} className={cls}>
+                          {l.label}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

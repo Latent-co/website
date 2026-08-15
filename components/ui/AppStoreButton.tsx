@@ -1,15 +1,20 @@
 import Pressable from "./Pressable";
+import { WAITLIST_URL, WAITLIST_LABEL } from "@/lib/links";
 
 /**
- * Primary "Download Latent" action. Two looks: `gold` (the loud, primary
- * moment — hero + final CTA) and the default off-white chip. The accent is
- * used sparingly, so most of the site stays monochrome.
+ * Primary sign-up action. Two looks: `gold` (the loud, primary moment — hero
+ * + final CTA) and the default off-white chip. The accent is used sparingly,
+ * so most of the site stays monochrome.
+ *
+ * Points at the waitlist rather than the App Store: the app hasn't shipped
+ * publicly yet, and this used to default to `#download` — an anchor pointing
+ * at the section that contains the button, so it scrolled to itself.
  */
 export default function AppStoreButton({
-  href = "#download",
+  href = WAITLIST_URL,
   className = "",
   variant = "paper",
-  label = "Download Latent",
+  label = WAITLIST_LABEL,
 }: {
   href?: string;
   className?: string;

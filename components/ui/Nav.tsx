@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Wordmark from "./Wordmark";
 import Pressable from "./Pressable";
 import { EASE } from "@/lib/motion";
+import { WAITLIST_URL, WAITLIST_LABEL } from "@/lib/links";
 
 const links: { label: string; href: string }[] = [];
 
@@ -57,11 +58,11 @@ export default function Nav() {
         </div>
 
         <Pressable
-          href="#download"
+          href={WAITLIST_URL}
           hover={1.04}
           className="surface-paper rounded-full px-5 py-2.5 text-sm font-semibold"
         >
-          Download
+          {WAITLIST_LABEL}
         </Pressable>
       </nav>
     </motion.header>

@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Wordmark from "@/components/ui/Wordmark";
+import { WAITLIST_URL, WAITLIST_LABEL } from "@/lib/links";
 
 const groups = [
   {
     heading: "Product",
     links: [
       { label: "Stats", href: "#stats" },
-      { label: "Download", href: "#download" },
+      { label: WAITLIST_LABEL, href: WAITLIST_URL },
     ],
   },
   {

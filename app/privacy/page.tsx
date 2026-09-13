@@ -63,6 +63,10 @@ export default function PrivacyPolicy() {
             Information contained in posts, activities, tags, comments, or other
             content you submit
           </li>
+          <li>
+            Direct messages you send to friends, along with comments, kudos, and
+            nudges you share with them
+          </li>
         </ul>
 
         <h3>b. Focus Session and Productivity Data</h3>

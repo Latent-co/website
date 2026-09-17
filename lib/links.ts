@@ -17,4 +17,8 @@ const WAITLIST_BASE = "/early-access";
 
 export const WAITLIST_URL = `${WAITLIST_BASE}?utm_source=trylatent-site&utm_medium=web&utm_campaign=apex`;
 
-export const WAITLIST_LABEL = "Join the waitlist";
+// Not "Join the waitlist" any more, because it is not one: the survey ends by handing
+// over the TestFlight link, so nobody is waiting for anything. Promising a queue and
+// then delivering the build immediately undersells the thing at the exact moment
+// someone decides whether to start.
+export const WAITLIST_LABEL = "Get early access";

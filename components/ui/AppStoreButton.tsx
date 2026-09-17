@@ -6,9 +6,9 @@ import { WAITLIST_URL, WAITLIST_LABEL } from "@/lib/links";
  * + final CTA) and the default off-white chip. The accent is used sparingly,
  * so most of the site stays monochrome.
  *
- * Points at the waitlist rather than the App Store: the app hasn't shipped
- * publicly yet, and this used to default to `#download` — an anchor pointing
- * at the section that contains the button, so it scrolled to itself.
+ * Points at the early-access survey rather than the App Store: the app is
+ * TestFlight-only for now, and this used to default to `#download` — an anchor
+ * pointing at the section that contains the button, so it scrolled to itself.
  */
 export default function AppStoreButton({
   href = WAITLIST_URL,

@@ -13,6 +13,22 @@ const nextConfig = {
     return [
       // Founding testers were handed /waitlist back when the waitlist owned the apex.
       { source: "/waitlist", destination: "/early-access", permanent: false },
+      // Invite links. The iOS app's share sheet sends `trylatent.co/i/<CODE>`, and the code
+      // in that URL is what lets a friend in: they paste the link (or type the six
+      // characters) at the app's invite gate. This only has to get them the app, so it is a
+      // redirect and not a page - Apple carries nothing through an install, so there is
+      // nothing a page could hand over that the URL in their messages does not already.
+      //
+      // Per-code URLs rather than one shared link so that taps show up per inviter in
+      // Vercel analytics: tap -> install -> redeem, instead of redeem alone.
+      //
+      // Points at TestFlight, the same link /early-access ends on. Swap it for the App
+      // Store URL once 1.0 is approved. Temporary (307) so that swap is not cached away.
+      {
+        source: "/i/:code",
+        destination: "https://testflight.apple.com/join/QJrVVGZA",
+        permanent: false,
+      },
     ];
   },
 };

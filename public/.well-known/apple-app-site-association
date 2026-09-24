@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["UR5VDB68NV.com.eddielou.latent"],
+        "components": [{ "/": "/i/*" }]
+      }
+    ]
+  }
+}

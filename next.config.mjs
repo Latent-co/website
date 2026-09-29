@@ -13,11 +13,33 @@ const nextConfig = {
   // link before sending someone to the store, which is how the code survives the install.
   // With the app installed the link never reaches here at all. This file is what tells iOS
   // to open the app instead, and Apple only reads it as JSON.
+  // The home page is two static pages in public/home/: index.html for laptops and tablets,
+  // mobile.html for phones, built as full-screen scenes. Both are served at `/` so a shared
+  // link works on either; the user agent picks, and ?desktop=1 / ?mobile=1 force one (for
+  // testing). iPads and Android tablets say neither "iPhone" nor "Android ... Mobile", so
+  // they get the desktop page, which handles their widths.
+  async rewrites() {
+    const phone = ".*(?:iPhone|iPod|Android.+Mobile|Windows Phone).*";
+    return {
+      beforeFiles: [
+        { source: "/", has: [{ type: "query", key: "desktop", value: "(?:.*)" }], destination: "/home/index.html" },
+        { source: "/", has: [{ type: "query", key: "mobile", value: "(?:.*)" }], destination: "/home/mobile.html" },
+        { source: "/", has: [{ type: "header", key: "user-agent", value: phone }], destination: "/home/mobile.html" },
+        { source: "/", destination: "/home/index.html" },
+      ],
+    };
+  },
+
   async headers() {
     return [
       {
         source: "/.well-known/apple-app-site-association",
         headers: [{ key: "Content-Type", value: "application/json" }],
+      },
+      // One URL, two pages: no cache in front of `/` may hand a phone the desktop page.
+      {
+        source: "/",
+        headers: [{ key: "Vary", value: "User-Agent" }],
       },
     ];
   },

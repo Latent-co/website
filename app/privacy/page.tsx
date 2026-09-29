@@ -273,7 +273,7 @@ export default function PrivacyPolicy() {
         </p>
         <p>
           To exercise applicable privacy rights, contact us at{" "}
-          <a href="mailto:info@latent.app">info@latent.app</a>.
+          <a href="mailto:support@trylatent.co">support@trylatent.co</a>.
         </p>
         <p>
           We may need to verify your identity before completing certain requests.
@@ -336,7 +336,7 @@ export default function PrivacyPolicy() {
         </p>
         <p>
           <strong>Email:</strong>{" "}
-          <a href="mailto:info@latent.app">info@latent.app</a>
+          <a href="mailto:support@trylatent.co">support@trylatent.co</a>
         </p>
       </article>
     </main>

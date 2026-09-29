@@ -14,7 +14,7 @@ const groups = [
     heading: "Legal",
     links: [
       { label: "Privacy", href: "/privacy" },
-      { label: "Contact", href: "mailto:info@latent.app" },
+      { label: "Contact", href: "mailto:support@trylatent.co" },
     ],
   },
 ];

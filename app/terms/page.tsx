@@ -168,7 +168,7 @@ export default function TermsOfService() {
         </p>
         <p>
           To report content or a user, use the in-app reporting tools, or contact
-          us at <a href="mailto:info@latent.app">info@latent.app</a>.
+          us at <a href="mailto:support@trylatent.co">support@trylatent.co</a>.
         </p>
 
         <h2>8. Copyright and DMCA</h2>
@@ -177,7 +177,7 @@ export default function TermsOfService() {
           If you believe content on the Platform infringes your copyright, send a
           notice under the Digital Millennium Copyright Act (DMCA) to our
           designated agent at{" "}
-          <a href="mailto:info@latent.app">info@latent.app</a>, including: (a)
+          <a href="mailto:support@trylatent.co">support@trylatent.co</a>, including: (a)
           your physical or electronic signature; (b) identification of the
           copyrighted work; (c) identification of the material you claim is
           infringing and where it is located; (d) your contact information; (e) a
@@ -234,7 +234,7 @@ export default function TermsOfService() {
           </strong>{" "}
           Most disputes can be resolved informally, so before filing a claim you
           agree to contact us at{" "}
-          <a href="mailto:info@latent.app">info@latent.app</a> and try to resolve
+          <a href="mailto:support@trylatent.co">support@trylatent.co</a> and try to resolve
           it for at least 30 days.
         </p>
         <p>
@@ -248,7 +248,7 @@ export default function TermsOfService() {
             or class-wide arbitration
           </strong>
           . You may opt out of this arbitration agreement by emailing{" "}
-          <a href="mailto:info@latent.app">info@latent.app</a> within 30 days of
+          <a href="mailto:support@trylatent.co">support@trylatent.co</a> within 30 days of
           first accepting these Terms.
         </p>
 
@@ -316,7 +316,7 @@ export default function TermsOfService() {
         <h2>18. Contact Us</h2>
         <p>
           If you have questions about these Terms, contact us at{" "}
-          <a href="mailto:info@latent.app">info@latent.app</a>.
+          <a href="mailto:support@trylatent.co">support@trylatent.co</a>.
         </p>
       </article>
     </main>

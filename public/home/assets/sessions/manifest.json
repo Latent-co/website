@@ -1,0 +1,338 @@
+[
+ {
+  "f": "sydney-00",
+  "u": "sydney",
+  "tag": "IMM 703A",
+  "dur": "3h 00m",
+  "date": "SEP 25 · 9:11 PM"
+ },
+ {
+  "f": "sydney-01",
+  "u": "sydney",
+  "tag": "IMMUN 201",
+  "dur": "2h 10m",
+  "date": "SEP 26 · 7:18 PM"
+ },
+ {
+  "f": "sydney-02",
+  "u": "sydney",
+  "tag": "IMM 701A",
+  "dur": "1h 50m",
+  "date": "SEP 16 · 10:25 PM"
+ },
+ {
+  "f": "landon-03",
+  "u": "landon",
+  "tag": "Math",
+  "dur": "2h 58m",
+  "date": "AUG 13 · 9:52 PM"
+ },
+ {
+  "f": "landon-04",
+  "u": "landon",
+  "tag": "Cubing",
+  "dur": "1h 25m",
+  "date": "SEP 27 · 2:56 PM"
+ },
+ {
+  "f": "landon-05",
+  "u": "landon",
+  "tag": "Misc",
+  "dur": "52m",
+  "date": "JUL 13 · 11:01 PM"
+ },
+ {
+  "f": "krabbykai-06",
+  "u": "krabbykai",
+  "tag": "Coding",
+  "dur": "5h 00m",
+  "date": "SEP 26 · 9:30 PM"
+ },
+ {
+  "f": "krabbykai-07",
+  "u": "krabbykai",
+  "tag": "Making",
+  "dur": "4h 36m",
+  "date": "SEP 14 · 8:26 PM"
+ },
+ {
+  "f": "krabbykai-08",
+  "u": "krabbykai",
+  "tag": "Studying",
+  "dur": "5h 08m",
+  "date": "SEP 13 · 11:37 PM"
+ },
+ {
+  "f": "rosie-09",
+  "u": "rosie",
+  "tag": "heart",
+  "dur": "1h 32m",
+  "date": "SEP 11 · 8:31 AM"
+ },
+ {
+  "f": "rosie-10",
+  "u": "rosie",
+  "tag": "Creator",
+  "dur": "1h 29m",
+  "date": "JUL 31 · 11:43 PM"
+ },
+ {
+  "f": "rosie-11",
+  "u": "rosie",
+  "tag": "Writer",
+  "dur": "1h 25m",
+  "date": "SEP 10 · 10:20 PM"
+ },
+ {
+  "f": "chloe-12",
+  "u": "chloe",
+  "tag": "math",
+  "dur": "4h 07m",
+  "date": "SEP 15 · 5:14 PM"
+ },
+ {
+  "f": "chloe-13",
+  "u": "chloe",
+  "tag": "chem",
+  "dur": "3h 53m",
+  "date": "SEP 19 · 12:39 PM"
+ },
+ {
+  "f": "rjho-15",
+  "u": "rjho",
+  "tag": "Academics",
+  "dur": "3h 25m",
+  "date": "SEP 23 · 9:42 PM"
+ },
+ {
+  "f": "rjho-17",
+  "u": "rjho",
+  "tag": "Other",
+  "dur": "2h 19m",
+  "date": "SEP 25 · 11:43 PM"
+ },
+ {
+  "f": "philan_jin-19",
+  "u": "philan_jin",
+  "tag": "Homework (yawnnn)",
+  "dur": "4h 00m",
+  "date": "SEP 13 · 12:04 PM"
+ },
+ {
+  "f": "philan_jin-20",
+  "u": "philan_jin",
+  "tag": "Bag chasing ✌️",
+  "dur": "2h 34m",
+  "date": "JUL 31 · 9:11 AM"
+ },
+ {
+  "f": "eddie-21",
+  "u": "eddie",
+  "tag": "Building Latent",
+  "dur": "2h 51m",
+  "date": "SEP 15 · 8:42 PM"
+ },
+ {
+  "f": "eddie-22",
+  "u": "eddie",
+  "tag": "Studying Math",
+  "dur": "1h 35m",
+  "date": "JUL 19 · 1:19 AM"
+ },
+ {
+  "f": "eddie-23",
+  "u": "eddie",
+  "tag": "Other",
+  "dur": "33m",
+  "date": "SEP 22 · 5:36 PM"
+ },
+ {
+  "f": "malcolm-24",
+  "u": "malcolm",
+  "tag": "Building Latent",
+  "dur": "2h 20m",
+  "date": "SEP 17 · 1:36 PM"
+ },
+ {
+  "f": "malcolm-26",
+  "u": "malcolm",
+  "tag": "Other",
+  "dur": "26m",
+  "date": "SEP 9 · 10:19 PM"
+ },
+ {
+  "f": "sydney-b01",
+  "u": "sydney",
+  "tag": "IMMUN 201",
+  "dur": "1h 45m",
+  "date": "SEP 20 · 9:09 PM"
+ },
+ {
+  "f": "sydney-b02",
+  "u": "sydney",
+  "tag": "MCB 169",
+  "dur": "1h 40m",
+  "date": "SEP 28 · 3:22 PM"
+ },
+ {
+  "f": "sydney-b03",
+  "u": "sydney",
+  "tag": "HTGAA",
+  "dur": "1h 34m",
+  "date": "SEP 25 · 3:12 AM"
+ },
+ {
+  "f": "landon-b04",
+  "u": "landon",
+  "tag": "Math",
+  "dur": "1h 18m",
+  "date": "AUG 13 · 12:28 AM"
+ },
+ {
+  "f": "landon-b06",
+  "u": "landon",
+  "tag": "Math",
+  "dur": "1h 05m",
+  "date": "AUG 11 · 7:46 PM"
+ },
+ {
+  "f": "krabbykai-b08",
+  "u": "krabbykai",
+  "tag": "Making",
+  "dur": "3h 43m",
+  "date": "SEP 8 · 8:01 PM"
+ },
+ {
+  "f": "krabbykai-b10",
+  "u": "krabbykai",
+  "tag": "Studying",
+  "dur": "3h 05m",
+  "date": "SEP 20 · 11:08 PM"
+ },
+ {
+  "f": "rosie-b12",
+  "u": "rosie",
+  "tag": "Student",
+  "dur": "1h 17m",
+  "date": "SEP 17 · 6:11 PM"
+ },
+ {
+  "f": "rosie-b14",
+  "u": "rosie",
+  "tag": "Writer",
+  "dur": "27m",
+  "date": "AUG 27 · 7:33 PM"
+ },
+ {
+  "f": "rosie-b15",
+  "u": "rosie",
+  "tag": "Student",
+  "dur": "2h 08m",
+  "date": "SEP 28 · 12:24 PM"
+ },
+ {
+  "f": "chloe-b16",
+  "u": "chloe",
+  "tag": "math",
+  "dur": "5h 02m",
+  "date": "AUG 31 · 4:06 PM"
+ },
+ {
+  "f": "chloe-b17",
+  "u": "chloe",
+  "tag": "chem",
+  "dur": "3h 32m",
+  "date": "SEP 27 · 1:08 PM"
+ },
+ {
+  "f": "chloe-b18",
+  "u": "chloe",
+  "tag": "chem",
+  "dur": "3h 14m",
+  "date": "SEP 9 · 5:37 PM"
+ },
+ {
+  "f": "chloe-b19",
+  "u": "chloe",
+  "tag": "Other",
+  "dur": "2h 39m",
+  "date": "AUG 30 · 5:57 PM"
+ },
+ {
+  "f": "rjho-b20",
+  "u": "rjho",
+  "tag": "Academics",
+  "dur": "2h 24m",
+  "date": "SEP 27 · 3:45 PM"
+ },
+ {
+  "f": "rjho-b21",
+  "u": "rjho",
+  "tag": "Content",
+  "dur": "2h 12m",
+  "date": "SEP 26 · 2:10 PM"
+ },
+ {
+  "f": "philan_jin-b24",
+  "u": "philan_jin",
+  "tag": "Homework (yawnnn)",
+  "dur": "5h 00m",
+  "date": "AUG 23 · 4:35 PM"
+ },
+ {
+  "f": "philan_jin-b26",
+  "u": "philan_jin",
+  "tag": "Homework (yawnnn)",
+  "dur": "3h 00m",
+  "date": "AUG 26 · 5:14 PM"
+ },
+ {
+  "f": "philan_jin-b27",
+  "u": "philan_jin",
+  "tag": "Homework (yawnnn)",
+  "dur": "2h 32m",
+  "date": "AUG 17 · 5:33 PM"
+ },
+ {
+  "f": "eddie-b28",
+  "u": "eddie",
+  "tag": "Building Latent",
+  "dur": "2h 33m",
+  "date": "APR 3 · 7:49 AM"
+ },
+ {
+  "f": "eddie-b29",
+  "u": "eddie",
+  "tag": "Building Latent",
+  "dur": "1h 31m",
+  "date": "AUG 5 · 12:37 AM"
+ },
+ {
+  "f": "eddie-b30",
+  "u": "eddie",
+  "tag": "Building Latent",
+  "dur": "1h 25m",
+  "date": "AUG 24 · 6:18 PM"
+ },
+ {
+  "f": "eddie-b31",
+  "u": "eddie",
+  "tag": "Building Latent",
+  "dur": "1h 23m",
+  "date": "AUG 19 · 4:30 PM"
+ },
+ {
+  "f": "malcolm-b32",
+  "u": "malcolm",
+  "tag": "Building Latent",
+  "dur": "1h 44m",
+  "date": "SEP 23 · 10:08 AM"
+ },
+ {
+  "f": "malcolm-b34",
+  "u": "malcolm",
+  "tag": "Building Latent",
+  "dur": "1h 36m",
+  "date": "SEP 22 · 2:46 PM"
+ }
+]

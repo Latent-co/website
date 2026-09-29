@@ -1,0 +1,221 @@
+/* Latent landing — the phone page. Loads after site.css (tokens, type, the shared components) and
+   lays each section out as one full screen: on a phone the screen IS the device, so the session,
+   the recording screen and the story fill it instead of sitting in a mockup. */
+
+.m { --pad: 20px; --top: calc(64px + env(safe-area-inset-top, 0px)); }
+.m .step__n { font-size: 1em; line-height: 1; }
+
+/* ── 1 · hero: the clip fills the phone, pulls back into the wall, then the name ── */
+.mh { position: relative; height: 560svh; }
+.mh__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--bg); isolation: isolate; }
+.m .t--slot { background: transparent; }
+.mh__clip { position: absolute; left: 50%; top: 50%; z-index: 2; overflow: hidden; background: #000; will-change: transform; transform-origin: 50% 50%; }
+.mh__clip video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mh__shade { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(14,13,12,.55) 0%, rgba(14,13,12,0) 22%, rgba(14,13,12,0) 42%, rgba(14,13,12,.9) 78%, var(--bg) 100%); }
+.mh__copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; display: grid; justify-items: start; gap: 16px; padding: 0 var(--pad) calc(40px + env(safe-area-inset-bottom, 0px)); }
+.mh__copy h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(42px, 12.4vw, 56px); line-height: .98; letter-spacing: -.025em; text-shadow: 0 4px 40px rgba(0,0,0,.5); }
+.mh__sub { margin: 0; max-width: 30em; font-size: 16px; line-height: 1.5; color: rgba(247,243,234,.84); text-shadow: 0 2px 20px rgba(0,0,0,.6); }
+.mh__copy .btn { margin-top: 4px; }
+.mh__center { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: var(--top) var(--pad) 40px; pointer-events: none; }
+.m .hero__cap { width: 100%; }
+.m .dict__word { font-size: 44px; }
+.m .dict__meta { font-size: 13px; }
+.m .dict__def { font-size: 17px; }
+.m .cap__line { font-size: clamp(38px, 11vw, 50px); margin-top: 34px !important; }
+.m .cap__line::before { margin-bottom: 34px; }
+.m .hero__hint { bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+
+/* ── 2 · 01 record: the whole screen is the app mid-recording ── */
+.mr { position: relative; height: 420svh; }
+.mr__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #000; isolation: isolate; color: var(--paper); }
+.mr__pin canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mr__dim { position: absolute; inset: 0; z-index: 2; background: #000; opacity: 0; display: grid; place-items: center; }
+.mr__dim span { color: rgba(247,243,234,.5); font-size: 14px; }
+.mr__shade { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.1) 30%, rgba(0,0,0,0) 44%, rgba(0,0,0,.55) 62%, rgba(0,0,0,.9) 100%); }
+.mr__head { position: absolute; left: var(--pad); right: var(--pad); top: calc(var(--top) + 6px); z-index: 5; display: grid; gap: 12px; }
+.mr__bars { display: flex; gap: 4px; }
+.mr__bars span { flex: 1; height: 2.5px; border-radius: 2px; background: rgba(247,243,234,.22); overflow: hidden; }
+.mr__bars i { display: block; height: 100%; background: var(--paper); transform-origin: left; transform: scaleX(var(--f, 0)); }
+.mr__title, .mt__title { margin: 0; font-family: var(--serif); font-size: 30px; line-height: 1; letter-spacing: -.01em; }
+.mr__ui { position: absolute; left: 0; right: 0; top: calc(var(--top) + 118px); z-index: 5; display: grid; justify-items: center; }
+.mr__ui .rec__clock { margin-top: 12px; font-size: clamp(54px, 17vw, 72px); }
+.mr__ui .rec__mode { font-size: 11px; }
+.mr__note { position: absolute; left: 12px; right: 12px; top: calc(var(--top) + 66px); z-index: 7; display: flex; align-items: center; gap: 12px; padding: 12px 14px 12px 12px; border-radius: 20px; background: rgba(34,32,29,.9); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 20px 50px -14px rgba(0,0,0,.9); opacity: 0; transform: translateY(-18px) scale(.97); transition: opacity .45s var(--ease), transform .7s cubic-bezier(.34, 1.56, .64, 1); pointer-events: none; }
+.mr__note.on { opacity: 1; transform: none; }
+.mr__note b { display: block; font-size: 15px; font-weight: 600; line-height: 1.2; }
+.mr__note small { display: block; font-size: 13px; color: var(--text-2); }
+.mr__beats { position: absolute; left: var(--pad); right: var(--pad); bottom: calc(132px + env(safe-area-inset-bottom, 0px)); z-index: 5; height: 150px; }
+.m .mr__beats .beat { inset: auto 0 0 0; transform: translateY(16px); }
+.m .mr__beats .beat.on { transform: none; }
+.m .mr__beats .beat h4 { margin: 0 0 10px; font-size: clamp(30px, 8.6vw, 38px); max-width: none; text-shadow: 0 2px 30px rgba(0,0,0,.5); }
+.m .mr__beats .beat p { font-size: 16px; color: rgba(247,243,234,.8); }
+.mr__ctrl { position: absolute; left: var(--pad); right: var(--pad); bottom: calc(34px + env(safe-area-inset-bottom, 0px)); z-index: 5; height: 80px; display: grid; place-items: center; }
+.mr__ctrl .recbtn { width: 80px; height: 80px; transition: opacity .35s; }
+.mr__ctrl .recbtn span { width: 50px; height: 50px; }
+.mr__pin.is-paused .recbtn { opacity: .4; }
+
+/* ── 3 · 02 track: history, then numbers, slide past sideways ── */
+.mt { position: relative; height: 320svh; }
+.mt__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; padding-top: var(--top); }
+.mt__head { display: flex; align-items: center; justify-content: space-between; padding: 14px var(--pad) 4px; }
+.mt__dots { display: flex; gap: 6px; }
+.mt__dots span { width: 7px; height: 7px; border-radius: 4px; background: rgba(247,243,234,.25); transition: width .4s var(--ease), background-color .4s; }
+.mt__dots span.on { width: 22px; background: var(--paper); }
+.mt__rail { flex: 1; min-height: 0; display: flex; width: 200vw; will-change: transform; }
+.mt__panel { width: 100vw; flex: none; min-height: 0; display: flex; flex-direction: column; gap: 16px; padding: 14px var(--pad) calc(22px + env(safe-area-inset-bottom, 0px)); }
+.mt__copy { display: grid; gap: 10px; }
+.mt__copy h4 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 9vw, 40px); line-height: 1; letter-spacing: -.02em; }
+.m .ticks { margin: 2px 0 0; gap: 7px; }
+.m .ticks li { font-size: 14.5px; padding-left: 26px; }
+.m .ticks li::before { top: 1px; }
+.m .ticks li::after { top: 5px; }
+.m .profile { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 14px; border-radius: 24px; }
+.m .profile__head { margin-bottom: 12px; }
+.m .pgrid { flex: 1; min-height: 0; grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.m .pgrid a { aspect-ratio: auto; height: 100%; }
+.m .pgrid span b { font-size: 19px; white-space: nowrap; }
+.m .panel { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: 24px; }
+.m .panel__stats { grid-template-columns: 1.6fr 1fr 1fr; gap: 10px; }
+.m .panel__stats div:first-child { grid-column: auto; }
+.m .panel__stats div { gap: 6px; }
+.m .panel__stats .label { font-size: 10px; }
+.m .panel__stats b { font-size: 24px; }
+.m .panel__stats b.big { font-size: 34px; }
+.m .panel__split { flex: 1; min-height: 0; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: end; padding-top: 14px; }
+.m .panel__bars { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; min-height: 0; }
+.m .bars { flex: 1; min-height: 60px; height: auto; max-height: 190px; gap: 5px; }
+.m .bars__days { gap: 5px; font-size: 10px; }
+/* the phone shows the last six weeks, sized to the height that is left */
+.m .heat { grid-template-columns: repeat(7, clamp(11px, min(3.6vw, 2.4svh), 17px)); gap: 3px; }
+.m .heat i:nth-child(-n+21) { display: none; }
+.m .heat i { border-radius: 3px; }
+.m .panel__cal { grid-template-columns: none; justify-content: start; gap: 10px; }
+.m .panel__streak b { font-size: 20px; }
+.m .panel__streak span { font-size: 12px; }
+.m .bars__legend { margin-top: 0; font-size: 11px; gap: 4px 10px; }
+
+/* ── 4 · 03 share: friends, then the story fills the phone with the editor under it ── */
+.ms { position: relative; height: 380svh; }
+.ms__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; }
+.ms__head { position: absolute; left: 0; right: 0; top: var(--top); z-index: 8; }
+.ms__friends { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 12px; padding: calc(var(--top) + 60px) var(--pad) calc(18px + env(safe-area-inset-bottom, 0px)); transform-origin: 50% 30%; }
+.ms__sub { margin: 0; font-size: 15px; line-height: 1.5; color: var(--text-2); }
+.m .live { padding: 14px 16px; border-radius: 22px; }
+.m .live__head { margin-bottom: 10px; }
+.m .live__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.m .live__list li { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 6px; }
+.m .live__av, .m .live__av img { width: 46px; height: 46px; }
+.m .live__av img { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--recording); }
+.m .live__list b { font-size: 13px; }
+.m .live__list small { font-size: 11px; }
+.m .live__list small .live__clock { display: block; font-size: 12.5px; }
+/* the group card takes whatever height is left, and the race chart flexes inside it */
+.m .group { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 14px 16px; border-radius: 22px; }
+.m .group__race { position: relative; flex: 1; min-height: 72px; max-height: 190px; margin: 8px 0 10px; }
+.m .race { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* the chart stretches to the card; lines keep their weight, the end-of-line faces are dropped */
+.m .race path, .m .race line { vector-effect: non-scaling-stroke; }
+.m .race image { display: none; }
+.m .board { gap: 7px; }
+.m .board li { grid-template-columns: 14px 26px minmax(0, 1fr) auto; gap: 9px; }
+.m .board img { width: 26px; height: 26px; }
+.m .board strong { font-size: 14px; }
+.m .board em { font-size: 17px; }
+.m .board__tags { margin-top: 5px; height: 4px; }
+/* the nudge lands like a real notification, over the top of the screen */
+
+.ms__post { position: absolute; inset: 0; z-index: 7; background: var(--bg); transform: translate3d(0, 101%, 0); will-change: transform; }
+/* the story: full screen at first, then it shrinks into the editor's preview (transform set in mobile.js) */
+.ms__story { position: absolute; inset: 0; --cw: 100vw; overflow: hidden; background: #000; transform-origin: 50% 0; will-change: transform; }
+.ms__story video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ms__story .ig__bars { top: calc(var(--top) + 62px - var(--lift, 0px)); left: 12px; right: 12px; }
+.ms__story .ig__top { top: calc(var(--top) + 74px - var(--lift, 0px)); left: 12px; right: 12px; }
+.ms__story .ig__shade { background: linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.2) 26%, rgba(0,0,0,0) 40%); }
+.ms__story .stkr { top: calc(var(--top) + 250px - var(--lift, 0px)); --k: calc(var(--cw) / 560); }
+.ms__story .clk { top: calc(var(--top) + 138px - var(--lift, 0px)); --k: calc(var(--cw) * .36 / 300); }
+.ms__story .clk[data-face="ring"] { --k: calc(var(--cw) * .2 / 300); top: calc(var(--top) + 150px - var(--lift, 0px)); }
+/* the story's caption: what this screen says, and where it goes */
+.ms__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: grid; gap: 10px; padding: 90px var(--pad) calc(26px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.72) 34%, rgba(0,0,0,.9) 100%); }
+.ms__cap h4 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 9.6vw, 42px); line-height: 1; letter-spacing: -.02em; }
+.ms__cap .ms__sub { color: rgba(247,243,234,.8); }
+.ms__cap .label { color: rgba(247,243,234,.6); }
+/* the edit tray, the way the app's editor sits under its preview */
+.ms__sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; padding: 20px 12px calc(14px + env(safe-area-inset-bottom, 0px)); border-radius: 26px 26px 0 0; background: #151412; box-shadow: 0 -1px 0 rgba(255,255,255,.08), 0 -30px 60px -20px rgba(0,0,0,.8); transform: translate3d(0, 104%, 0); }
+.ms__sheet::before { content: ""; position: absolute; left: 50%; top: 8px; width: 36px; height: 4px; margin-left: -18px; border-radius: 2px; background: rgba(247,243,234,.25); }
+.m .ms__sheet .tray { margin: 0; padding: 0; background: none; box-shadow: none; }
+.m .ms__sheet .tray__tabs { margin-bottom: 10px; }
+.m .ms__sheet .tray__tabs button { padding: 8px 0; font-size: 13.5px; }
+/* two rows of tiles, whatever the phone's width (tile width ÷ its 1.7 aspect, plus the labels) */
+.m .ms__sheet .tray__body { height: calc((100vw - 38px) / 3 / 1.7 * 2 + 40px); min-height: 0; }
+.m .ms__sheet .tray__grid { gap: 7px; }
+.m .ms__sheet .tile { font-size: 11px; gap: 4px; }
+.m .ms__sheet .tile__face { aspect-ratio: 1.7; }
+.ms__dests { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 6px; }
+.ms__dests span { display: grid; justify-items: center; gap: 6px; font-size: 11.5px; font-weight: 500; color: rgba(247,243,234,.78); }
+.ms__dests img { width: 50px; height: 50px; border-radius: 12.5px; box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 10px 24px -8px rgba(0,0,0,.6); }
+
+/* short phones (SE, mini): trim the extras so each screen still holds */
+@media (max-height: 740px) {
+  .m .live { padding: 12px 14px; }
+  .m .live__head { margin-bottom: 8px; }
+  .m .live__av, .m .live__av img { width: 40px; height: 40px; }
+  .m .live__list li { gap: 4px; }
+  .m .group { padding: 12px 14px; }
+  .m .group__race { min-height: 52px; margin: 6px 0 8px; }
+  .m .board { gap: 5px; }
+  .m .ms__friends { gap: 10px; }
+  .m .ms__friends .ms__sub { display: none; }
+  .ms__dests img { width: 44px; height: 44px; border-radius: 11px; }
+  .m .mt__panel .ticks li:nth-child(n+3) { display: none; }
+  .mr__ui { top: calc(var(--top) + 104px); }
+  .mr__ui .rec__clock { font-size: 52px; }
+  .m .mr__beats .beat h4 { font-size: 28px; }
+  .m .mr__beats .beat p { font-size: 14.5px; }
+}
+
+/* the smallest phones (SE): two leaders, no legend */
+@media (max-height: 620px) {
+  .m .mt__panel .ticks, .m .live__head { display: none; }
+  .m .group__race { min-height: 40px; }
+  .m .group__top small.mono { display: none; }
+  .m .group__total .serif { font-size: 22px; }
+  .m .bars__legend { display: none; }
+  .m .panel__stats b.big { font-size: 28px; }
+  .m .panel__stats b { font-size: 20px; }
+  .m .mt__copy h4, .m .ms__friends h4, .ms__cap h4 { font-size: 30px; }
+  .m .ms__cap .ms__sub { display: none; }
+  .m .live { padding: 10px 14px; }
+  .m .live__head { margin-bottom: 6px; }
+  .m .live__av, .m .live__av img { width: 38px; height: 38px; }
+}
+
+/* the phone page is built upright; held sideways, it asks to be turned back */
+.rotate { display: none; }
+@media (orientation: landscape) and (max-height: 500px) {
+  .rotate { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; justify-items: center; gap: 14px; background: var(--bg); color: var(--paper); }
+  .rotate svg { width: 56px; height: 56px; color: var(--accent); }
+  .rotate p { margin: 0; font-family: var(--serif); font-size: 28px; }
+}
+
+/* the rest of the page (testimonials, questions, close) keeps site.css's phone layout */
+.m .voices { overflow: hidden; }
+
+/* Reduce Motion: nothing pins; every screen reads as a still */
+.reduce .mh, .reduce .mr, .reduce .mt, .reduce .ms { height: auto; }
+.reduce .mh__stage { height: 100svh; }
+.reduce .mh__center { display: none; }
+.reduce .mr__pin { height: 100svh; }
+.reduce .mt__pin, .reduce .ms__pin { position: relative; height: auto; }
+.reduce .mt__rail { width: auto; flex-direction: column; }
+.reduce .mt__panel { width: auto; height: 100svh; }
+.reduce .ms__friends, .reduce .ms__post { position: relative; inset: auto; transform: none; min-height: 100svh; }
+.reduce .ms__sheet { position: relative; transform: none; }
+.reduce .ms__cap { position: relative; }
+.reduce .mr__beats { height: auto; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 18px; }
+.reduce .m .mr__beats .beat, .reduce .mr__beats .beat { position: relative; inset: auto; opacity: 1; transform: none; }
+.reduce .m .mr__beats .beat h4 { font-size: 26px; margin-bottom: 6px; }
+.reduce .m .mr__beats .beat p { font-size: 14px; }
+.reduce .mr__ctrl, .reduce .mr__note { display: none; }
+.reduce .mr__beats .beat { margin: 0; }
+.reduce .mr__beats { gap: 14px; }
+.reduce .mr__ui { top: calc(var(--top) + 70px); }

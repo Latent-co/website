@@ -202,9 +202,12 @@
     });
     return motion => lines.forEach(({ path, img, len }, i) => {
       path.style.strokeDasharray = len;
-      if (!motion) { path.style.strokeDashoffset = 0; img.style.opacity = 1; return; }
+      // Drawn: drop the dash. On the phone page the chart is stretched to its card with
+      // non-scaling strokes, which makes the dash (measured in chart units) shorter than the
+      // line on screen, so a finished line would otherwise stop partway.
+      if (!motion) { path.style.strokeDasharray = "none"; img.style.opacity = 1; return; }
       path.style.strokeDashoffset = len;
-      gsap.to(path, { strokeDashoffset: 0, duration: 2, delay: i * .12, ease: "power2.inOut" });
+      gsap.to(path, { strokeDashoffset: 0, duration: 2, delay: i * .12, ease: "power2.inOut", onComplete: () => (path.style.strokeDasharray = "none") });
       gsap.to(img, { opacity: 1, duration: .4, delay: i * .12 + 1.8 });
     });
   }

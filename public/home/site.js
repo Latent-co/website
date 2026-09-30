@@ -176,6 +176,11 @@
   if (!motion) {
     render(1);
     copy.style.cssText = ""; words.forEach(w => (w.style.cssText = ""));
+    // quiet mode: the name's definition can't develop over the wall, so it gets a band of its own
+    const band = document.createElement("section");
+    band.className = "name-band"; band.setAttribute("aria-label", "The name");
+    band.appendChild(cap);
+    $(".hero").after(band);
   } else {
     render(0);
     ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom bottom", onUpdate: s => render(s.progress), onRefresh: s => render(s.progress) });

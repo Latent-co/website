@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+# invite links are one-off, and /ingest is the analytics proxy
+Disallow: /i/
+Disallow: /ingest/
+
+Sitemap: https://trylatent.co/sitemap.xml

@@ -31,7 +31,7 @@ export default function TermsOfService() {
           Latent Terms of Service
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: September 13, 2026
+          Effective Date: September 30, 2026
         </p>
 
         <p>
@@ -176,17 +176,48 @@ export default function TermsOfService() {
           We respect intellectual property rights and expect you to do the same.
           If you believe content on the Platform infringes your copyright, send a
           notice under the Digital Millennium Copyright Act (DMCA) to our
-          designated agent at{" "}
-          <a href="mailto:support@trylatent.co">support@trylatent.co</a>, including: (a)
-          your physical or electronic signature; (b) identification of the
-          copyrighted work; (c) identification of the material you claim is
-          infringing and where it is located; (d) your contact information; (e) a
-          statement that you have a good-faith belief the use is not authorized;
-          and (f) a statement, under penalty of perjury, that the information is
-          accurate and that you are the rights holder or authorized to act on
-          their behalf. We respond to valid notices, including by removing
-          infringing content, and we terminate the accounts of repeat
-          infringers.
+          designated agent:
+        </p>
+        <p>
+          Copyright Agent, Weaive, Inc.
+          <br />
+          131 Continental Dr, Suite 305, Newark, DE 19713
+          <br />
+          Phone: (510) 671-5803
+          <br />
+          Email:{" "}
+          <a href="mailto:support@trylatent.co">support@trylatent.co</a>
+        </p>
+        <p>
+          Your notice must include: (a) your physical or electronic signature;
+          (b) identification of the copyrighted work; (c) identification of the
+          material you claim is infringing and where it is located; (d) your
+          contact information; (e) a statement that you have a good-faith belief
+          the use is not authorized; and (f) a statement, under penalty of
+          perjury, that the information is accurate and that you are the rights
+          holder or authorized to act on their behalf. We respond to valid
+          notices, including by removing infringing content, and we make a
+          reasonable effort to tell the user who posted it. We terminate, in
+          appropriate circumstances, the accounts of repeat infringers.
+        </p>
+        <p>
+          Counter-notice. If you believe content you posted was removed by
+          mistake or misidentification, you may send a counter-notice to our
+          designated agent that includes: (a) your physical or electronic
+          signature; (b) identification of the removed material and where it
+          appeared before it was removed; (c) a statement, under penalty of
+          perjury, that you have a good-faith belief the material was removed as
+          a result of mistake or misidentification; and (d) your name, address,
+          and phone number, and a statement that you consent to the jurisdiction
+          of the federal district court for the judicial district where your
+          address is located (or, if you are outside the United States, any
+          judicial district in which Weaive, Inc. may be found), and that you will
+          accept service of process from the person who sent the original notice
+          or that person&rsquo;s agent. When we receive a valid counter-notice,
+          we forward it to the person who sent the original notice and may
+          restore the material in 10 to 14 business days, unless that person
+          tells us they have filed a court action to stop the alleged
+          infringement.
         </p>
 
         <h2>9. Termination</h2>

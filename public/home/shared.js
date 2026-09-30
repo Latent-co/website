@@ -404,6 +404,29 @@
       setTimeout(() => location.replace(u), 120);          // let the event leave first
     });
   });
+  // The corner pill steps aside whenever it would sit on something someone might read or tap
+  // (a button, a link, a heading, the edit tray, the footer), and shrinks to the bare toggle
+  // once the page is scrolled. Checked against what is actually under it, on every screen
+  // size, rather than a list of places.
+  const pill = $(".quiet--float");
+  if (pill) {
+    const KEEP_CLEAR = "a[href], button, h1, h2, h4, .tile, .tray, .dests, .ms__dests, .panel__streak, .foot";
+    let queued = false;
+    const check = () => {
+      queued = false;
+      pill.classList.toggle("is-mini", scrollY > 240 || innerWidth <= 380);
+      const r = pill.getBoundingClientRect(), pad = 6;
+      const pts = [[r.left + pad, r.top + pad], [r.right - pad, r.top + pad], [r.left + pad, r.bottom - pad], [r.right - pad, r.bottom - pad], [(r.left + r.right) / 2, (r.top + r.bottom) / 2]];
+      const covers = pts.some(([x, y]) => document.elementsFromPoint(x, y).some(el => !pill.contains(el) && el.closest(KEEP_CLEAR)));
+      pill.classList.toggle("is-away", covers);
+    };
+    // two frames: the scroll scenes move their content on the frame after the scroll
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(() => requestAnimationFrame(check)); } };
+    addEventListener("scroll", queue, { passive: true });
+    addEventListener("resize", queue);
+    setInterval(queue, 700);                                // content that moves on its own
+    check();
+  }
   let back = null;
   try { back = sessionStorage.getItem("latent-return"); sessionStorage.removeItem("latent-return"); } catch (e) {}
   if (back) {

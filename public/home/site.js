@@ -36,20 +36,30 @@
     const tiles = $$(".t", el), center = c === MID;
     const L = tiles.length * STEP;
     const v = center ? 0 : SPEED[(c + (11 - N) / 2) % SPEED.length];
-    return { tiles, center, L, v, phase: (c * 0.37 % 1) * L };
+    return { el, tiles, center, L, v, phase: (c * 0.37 % 1) * L, k: null };
   });
+  // Each column moves as one piece (one style write per column per frame); a tile is only
+  // re-slotted when the column has drifted a whole tile, so it can wrap round to the far end.
+  // Writing every tile's transform every frame was hundreds of style recalcs a frame, and it
+  // was what made the end of the hero stutter.
   function drift(t) {
     cols.forEach(col => {
       if (col.center) {
+        if (col.done) return;
         const m = (col.tiles.length - 1) / 2;
-        col.tiles.forEach((el, r) => { if (!el._set) { el.style.transform = `translate3d(0,${(r - m) * STEP}px,0)`; el._set = 1; } });
-        return;
+        col.tiles.forEach((el, r) => (el.style.transform = `translate3d(0,${(r - m) * STEP}px,0)`));
+        col.done = 1; return;
       }
-      const off = col.phase + (t / 1000) * col.v;
-      col.tiles.forEach((el, r) => {
-        let y = (r * STEP + off) % col.L; if (y < 0) y += col.L;
-        el.style.transform = `translate3d(0,${(y - col.L / 2).toFixed(1)}px,0)`;
-      });
+      const off = col.phase + (t / 1000) * col.v, n = col.tiles.length;
+      const k = Math.floor(off / STEP), frac = off - k * STEP;
+      if (k !== col.k) {
+        col.k = k;
+        col.tiles.forEach((el, r) => {
+          const slot = (((r + k) % n) + n) % n;
+          el.style.transform = `translate3d(0,${(slot * STEP - col.L / 2).toFixed(1)}px,0)`;
+        });
+      }
+      col.el.style.transform = `translate3d(0,${frac.toFixed(1)}px,0)`;
     });
   }
   drift(0);

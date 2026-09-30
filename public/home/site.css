@@ -80,8 +80,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .hero { position: relative; height: 760vh; }
 .hero__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--bg); isolation: isolate; }
 .wall { position: absolute; left: 50%; top: 50%; display: flex; align-items: center; gap: var(--gap); transform: translate(-50%, -50%) scale(2); will-change: transform; }
-.wall__col { position: relative; width: var(--tw); height: var(--th); flex: none; }
-.wall__col > .t { position: absolute; left: 0; top: 0; will-change: transform; }
+.wall__col { position: relative; width: var(--tw); height: var(--th); flex: none; will-change: transform; }
+.wall__col > .t { position: absolute; left: 0; top: 0; }
 
 .t { position: relative; width: var(--tw); height: var(--th); border-radius: var(--tile-r); overflow: hidden; background: var(--surface); flex: none; }
 .t::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); pointer-events: none; }

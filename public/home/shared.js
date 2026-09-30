@@ -420,8 +420,14 @@
       const covers = pts.some(([x, y]) => document.elementsFromPoint(x, y).some(el => !pill.contains(el) && el.closest(KEEP_CLEAR)));
       pill.classList.toggle("is-away", covers);
     };
-    // two frames: the scroll scenes move their content on the frame after the scroll
-    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(() => requestAnimationFrame(check)); } };
+    // at most ~6x a second (hit-testing on every scroll event cost a frame's worth of work),
+    // and two frames late, because the scroll scenes move their content the frame after
+    let lastCheck = 0;
+    const queue = () => {
+      if (queued) return; queued = true;
+      const wait = Math.max(0, 160 - (performance.now() - lastCheck));
+      setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(() => { lastCheck = performance.now(); check(); })), wait);
+    };
     addEventListener("scroll", queue, { passive: true });
     addEventListener("resize", queue);
     setInterval(queue, 700);                                // content that moves on its own

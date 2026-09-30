@@ -41,8 +41,9 @@
   const SPEED = [15, -11, 0, 12, -14, 10, -13];
   const cols = $$(".wall__col", wall).map((el, c) => {
     const tiles = $$(".t", el), center = c === MID, L = tiles.length * STEP;
-    return { tiles, center, L, v: center ? 0 : SPEED[(c + (7 - N) / 2 + 7) % 7] || 12, phase: (c * .37 % 1) * L };
+    return { el, tiles, center, L, v: center ? 0 : SPEED[(c + (7 - N) / 2 + 7) % 7] || 12, phase: (c * .37 % 1) * L, k: null };
   });
+  // one style write per column per frame; a tile is re-slotted only when it wraps (see site.js)
   function drift(t) {
     cols.forEach(col => {
       if (col.center) {
@@ -51,11 +52,16 @@
         col.tiles.forEach((el, r) => (el.style.transform = `translate3d(0,${(r - m) * STEP}px,0)`));
         col.done = 1; return;
       }
-      const off = col.phase + (t / 1000) * col.v;
-      col.tiles.forEach((el, r) => {
-        let y = (r * STEP + off) % col.L; if (y < 0) y += col.L;
-        el.style.transform = `translate3d(0,${(y - col.L / 2).toFixed(1)}px,0)`;
-      });
+      const off = col.phase + (t / 1000) * col.v, n = col.tiles.length;
+      const k = Math.floor(off / STEP), frac = off - k * STEP;
+      if (k !== col.k) {
+        col.k = k;
+        col.tiles.forEach((el, r) => {
+          const slot = (((r + k) % n) + n) % n;
+          el.style.transform = `translate3d(0,${(slot * STEP - col.L / 2).toFixed(1)}px,0)`;
+        });
+      }
+      col.el.style.transform = `translate3d(0,${frac.toFixed(1)}px,0)`;
     });
   }
   drift(0);

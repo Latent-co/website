@@ -633,22 +633,27 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   .take__beats { min-height: 120px; }
 }
 
-/* ── quiet mode switch: the nav pill on desktop, a text button under the phone hero, a footer link ── */
-.nav__end { display: flex; align-items: center; gap: 10px; }
-.quiet { display: inline-flex; align-items: center; gap: 9px; height: 40px; padding: 0 14px 0 11px; border-radius: 999px; font: 600 13px/1 var(--sans); color: var(--text-2); background: rgba(14,13,12,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); cursor: pointer; transition: color .3s, box-shadow .3s; }
-.quiet:hover { color: var(--paper); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+/* ── quiet mode switch: a pill fixed in the bottom-right corner, and a footer link ── */
+.quiet { display: inline-flex; align-items: center; gap: 9px; font: 600 13px/1 var(--sans); color: var(--text-2); cursor: pointer; transition: color .3s, opacity .4s var(--ease), transform .4s var(--ease); }
+.quiet:hover { color: var(--paper); }
 .quiet__sw { position: relative; width: 26px; height: 16px; flex: none; border-radius: 8px; background: rgba(247,243,234,.18); transition: background-color .3s; }
 .quiet__sw::after { content: ""; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); transition: transform .3s var(--ease); }
 .quiet[aria-pressed="true"] { color: var(--paper); }
 .quiet[aria-pressed="true"] .quiet__sw { background: var(--paper); }
 .quiet[aria-pressed="true"] .quiet__sw::after { transform: translateX(10px); background: var(--bg); }
-.quiet--text { height: auto; padding: 6px 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; font-size: 14px; flex-wrap: wrap; column-gap: 9px; row-gap: 2px; }
-.quiet--text small { font-weight: 400; color: var(--text-3); font-size: 13px; }
-.quiet--text:hover { box-shadow: none; }
-.quiet--link { height: auto; padding: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; font: inherit; color: inherit; }
-.quiet--link:hover { box-shadow: none; }
+/* the floating corner switch, both pages */
+.quiet--float { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 60; height: 40px; padding: 0 14px 0 11px; border-radius: 999px; background: rgba(20,19,17,.78); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 10px 30px -10px rgba(0,0,0,.7); }
+.quiet--float:hover { box-shadow: inset 0 0 0 1px rgba(255,255,255,.24), 0 10px 30px -10px rgba(0,0,0,.7); }
+/* once the page is scrolled it shrinks to the bare toggle, so it covers as little as possible;
+   the label comes back on hover */
+.quiet--float > span:last-child { max-width: 90px; overflow: hidden; white-space: nowrap; transition: max-width .4s var(--ease), opacity .3s; }
+.quiet--float.is-mini { width: 40px; padding: 0; justify-content: center; gap: 0; }
+.quiet--float.is-mini > span:last-child { max-width: 0; opacity: 0; }
+@media (hover: hover) { .quiet--float.is-mini:hover { width: auto; padding: 0 14px 0 11px; gap: 9px; } .quiet--float.is-mini:hover > span:last-child { max-width: 90px; opacity: 1; } }
+/* stepped aside where it would sit on something (see shared.js) */
+.quiet--float.is-away { opacity: 0; pointer-events: none; }
+.quiet--link { font: inherit; color: inherit; }
 .quiet--link[aria-pressed="true"]::after { content: " · on"; color: var(--text-3); }
-@media (max-width: 720px) { .nav__end .quiet { display: none; } }
 
 /* quiet mode, desktop: one plain page. The pinned scenes' full-screen heights and their slide
    tabs mean nothing here, so the sections sit at the page's normal rhythm. */

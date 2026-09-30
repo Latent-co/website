@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: August 13, 2026
+          Effective Date: September 30, 2026
         </p>
 
         <p>
@@ -238,6 +238,11 @@ export default function PrivacyPolicy() {
         <p>
           When information is no longer reasonably necessary for these purposes, we
           may delete, anonymize, or otherwise de-identify it.
+        </p>
+        <p>
+          When you delete content, such as a session or a message you sent, we
+          remove it from the Platform. Deleted information may remain in our
+          backups for up to 30 days before it is permanently erased.
         </p>
 
         <h2>7. Security</h2>

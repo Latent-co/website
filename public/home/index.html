@@ -18,17 +18,33 @@
   <link rel="apple-touch-icon" href="assets/img/app-icon.png">
   <link rel="preload" href="assets/fonts/Gambarino-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/media/montage-poster.jpg" as="image">
+  <script>
+    // Quiet mode: no scroll scenes, no motion, a plain page to scroll. Decided here, before the
+    // first paint, so the page never flashes the animated version. The visitor's own choice
+    // (the Quiet mode switch, saved in localStorage, or ?quiet=1 / ?quiet=0) wins; with no
+    // choice made, it follows the OS "Reduce Motion" setting and Data Saver.
+    (function () {
+      var q = null, m = /[?&]quiet=(1|0)\b/.exec(location.search);
+      try { q = localStorage.getItem("latent-quiet"); } catch (e) {}
+      if (m) q = m[1];
+      var auto = matchMedia("(prefers-reduced-motion: reduce)").matches || (navigator.connection && navigator.connection.saveData);
+      if (q === "1" || (q === null && auto)) document.documentElement.classList.add("reduce");
+    })();
+  </script>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <header class="nav" data-nav>
     <a class="nav__brand" href="/" aria-label="Latent home"><img src="assets/img/wordmark.png" alt="Latent." width="89" height="26"></a>
-    <a class="btn btn--sm" href="https://trylatent.co/early-access?utm_source=trylatent-site">Join Early Access</a>
+    <div class="nav__end">
+      <button type="button" class="quiet" data-quiet aria-pressed="false"><span class="quiet__sw" aria-hidden="true"></span><span>Quiet mode</span></button>
+      <a class="btn btn--sm" href="/early-access?utm_source=trylatent-site" data-cta="nav">Join Early Access</a>
+    </div>
   </header>
 
   <main>
     <!-- 1 · HERO — one session, then the wall of everyone's, then the name -->
-    <section class="hero" id="top" aria-label="Intro">
+    <section class="hero" id="top" data-section="hero" aria-label="Intro">
       <div class="hero__stage">
         <div class="wall" data-wall aria-hidden="true"></div>
         <div class="hero__spot" data-spot aria-hidden="true"></div>
@@ -44,7 +60,7 @@
             <h1>Your best focus <span class="accent">starts here.</span></h1>
             <p class="lede lede--hero">Latent turns your distracting phone into<br> proof of your work, helping you lock in now and<br> motivating you to do it again.</p>
             <div class="cta-row">
-              <a class="btn" href="https://trylatent.co/early-access?utm_source=trylatent-site">Join Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="btn" href="/early-access?utm_source=trylatent-site" data-cta="hero">Join Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
           </div>
         </div>
@@ -57,7 +73,7 @@
       <div class="wrap how__label"><p class="label" data-reveal>How it works</p></div>
 
       <!-- 01 · RECORD — pinned: the phone on the right, three beats on the left -->
-      <article class="step step--record">
+      <article class="step step--record" data-section="record">
         <div class="take" data-take>
           <div class="take__pin">
             <div class="take__left">
@@ -101,7 +117,7 @@
       </article>
 
       <!-- 02 · TRACK — pinned, the two pages slide sideways: history, then progress -->
-      <article class="step step--track" data-track>
+      <article class="step step--track" data-track data-section="track">
         <div class="track__pin">
           <header class="wrap track__head">
             <div class="step__title"><span class="step__n">02</span><h3>Track</h3></div>
@@ -166,7 +182,7 @@
       </article>
 
       <!-- 03 · SHARE — pinned: friends first, then "post it anywhere" folds up over it -->
-      <article class="step step--share" data-share>
+      <article class="step step--share" data-share data-section="share">
         <div class="share__pin">
           <header class="wrap track__head">
             <div class="step__title"><span class="step__n">03</span><h3>Share</h3></div>
@@ -235,7 +251,7 @@
     </section>
 
     <!-- 3 · VOICES -->
-    <section class="section voices" id="voices">
+    <section class="section voices" id="voices" data-section="voices">
       <div class="wrap voices__head">
         <span class="voices__mark serif" aria-hidden="true">“</span>
         <h2 class="voices__quote serif" data-quote>I no longer feel the need to pick up my phone to doom&nbsp;scroll.</h2>
@@ -263,7 +279,7 @@
     </section>
 
     <!-- 4 · FAQ -->
-    <section class="section" id="faq">
+    <section class="section" id="faq" data-section="faq">
       <div class="wrap faqs">
         <div class="faqs__head">
           <h2 class="h2" data-reveal>Questions</h2>
@@ -282,13 +298,13 @@
     </section>
 
     <!-- 5 · CLOSE -->
-    <section class="close" data-close>
+    <section class="close" data-close data-section="close">
       <div class="mosaic" data-mosaic aria-hidden="true"></div>
       <div class="wrap close__inner">
         <h2 data-reveal>Make your effort <span class="accent">visible.</span></h2>
         <p class="lede" data-reveal="80">Start your first session today.</p>
         <div class="cta-row" data-reveal="160">
-          <a class="btn" href="https://trylatent.co/early-access?utm_source=trylatent-site">Join Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn" href="/early-access?utm_source=trylatent-site" data-cta="close">Join Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
     </section>
@@ -298,7 +314,7 @@
     <div class="wrap">
       <img src="assets/img/wordmark.png" alt="Latent." width="75" height="22">
       <small>© 2026 Latent</small>
-      <nav><a href="https://trylatent.co/early-access?utm_source=trylatent-site">Early Access</a><a href="https://trylatent.co/privacy">Privacy</a></nav>
+      <nav><a href="/early-access?utm_source=trylatent-site" data-cta="footer">Early Access</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><button type="button" class="quiet quiet--link" data-quiet aria-pressed="false"><span>Quiet mode</span></button></nav>
     </div>
   </footer>
 
@@ -307,5 +323,6 @@
   <script src="vendor/lenis.min.js"></script>
   <script src="shared.js"></script>
   <script src="site.js"></script>
+  <script src="analytics.js"></script>
 </body>
 </html>

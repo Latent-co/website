@@ -6,10 +6,10 @@
   if (document.documentElement.dataset.redirect) return;   // a phone, on its way to mobile.html
 
   const { $, $$, clamp01, smooth, hms, S, tile, place } = LATENT;
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // quiet mode (or the OS Reduce Motion setting): decided in the page head, before first paint
+  const reduce = document.documentElement.classList.contains("reduce");
   const hasGsap = !!(window.gsap && window.ScrollTrigger);
   const motion = !reduce && hasGsap;
-  if (reduce) document.documentElement.classList.add("reduce");
 
   /* ══ HERO: one framed session → a wall of real ones → the name ═══════════════ */
   const stage = $(".hero__stage"), wall = $("[data-wall]");
@@ -161,6 +161,7 @@
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
   if (motion && window.Lenis) {
     lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+    window.__lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(t => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -271,7 +272,7 @@
   $$(".pgrid video, [data-ig-video]").forEach(v => vio.observe(v));
 
   LATENT.buildLive($("[data-live-list]"), reduce);
-  LATENT.makeTray($("[data-sheet-b]"), { reduce });
+  LATENT.makeTray($("[data-sheet-b]"), { reduce, onUse: tab => window.latentTrack && latentTrack("landing_tray_used", { tab }) });
 
   const countEls = root => LATENT.countEls(root, motion);
   const feed = $("[data-feed]");

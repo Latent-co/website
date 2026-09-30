@@ -6,10 +6,10 @@
   "use strict";
 
   const { $, $$, clamp01, smooth, hms, S, tile, place } = LATENT;
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // quiet mode (or the OS Reduce Motion setting): decided in the page head, before first paint
+  const reduce = document.documentElement.classList.contains("reduce");
   const hasGsap = !!(window.gsap && window.ScrollTrigger);
   const motion = !reduce && hasGsap;
-  if (reduce) document.documentElement.classList.add("reduce");
   if (hasGsap) {
     gsap.registerPlugin(ScrollTrigger);
     // the URL bar sliding in and out resizes the viewport constantly; don't re-lay everything each time
@@ -189,7 +189,7 @@
   const shareHead = $(".ms__head"), igBars = $(".ig__bars", post);
   let liftMax = null;
   const igVideo = $("[data-ig-video]", post);
-  LATENT.makeTray(post, { reduce });
+  LATENT.makeTray(post, { reduce, onUse: tab => window.latentTrack && latentTrack("landing_tray_used", { tab }) });
 
   // videos below the hero load when they come near and play only while on screen
   const vio = new IntersectionObserver(es => es.forEach(e => {
@@ -222,6 +222,13 @@
   const nav = $("[data-nav]");
   if (!motion) {
     render(0); copy.style.cssText = "";
+    // quiet mode: the name's definition can't develop over the wall, so it gets its own block after the hero
+    const def = document.createElement("section");
+    def.className = "mh__def"; def.setAttribute("aria-label", "The name");
+    def.appendChild(cap);
+    words.forEach(w => (w.style.cssText = ""));
+    vis.style.setProperty("--u", "1");
+    $("[data-mhero]").after(def);
     const still = new Image();
     still.onload = () => { sizeCanvas(); ctx.drawImage(still, 0, 0, canvas.width, canvas.height); };
     still.src = "assets/media/rec/040.jpg";

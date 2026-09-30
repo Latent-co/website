@@ -224,3 +224,17 @@
 .mh__def .hero__cap .w { opacity: 1; }
 .mh__def .cap__vis::after { --u: 1; }
 .reduce .mr__bars { display: none; }
+
+/* quiet mode, phones: the Post-it-anywhere screen as a plain stack (story card, its caption,
+   then the tray) instead of the layered scene */
+.reduce .ms__post { min-height: 0; display: grid; gap: 22px; padding: 56px var(--pad) 48px; background: var(--bg); border-top: 1px solid var(--border); }
+.reduce .ms__story { position: relative; inset: auto; justify-self: center; width: min(72vw, 300px); --cw: min(72vw, 300px); aspect-ratio: 9 / 16; border-radius: 22px; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 80px -30px #000; }
+.reduce .ms__story .ig__bars { top: 10px; left: 10px; right: 10px; }
+.reduce .ms__story .ig__top { top: 22px; left: 10px; right: 10px; font-size: 12px; }
+.reduce .ms__story .ig__top img { width: 24px; height: 24px; }
+.reduce .ms__story .stkr { top: 44%; }
+.reduce .ms__story .clk, .reduce .ms__story .clk[data-face="ring"] { top: 18%; }
+.reduce .ms__cap { inset: auto; padding: 0; background: none; }
+.reduce .ms__sheet { inset: auto; padding: 12px 10px; border-radius: 22px; box-shadow: inset 0 0 0 1px var(--border); }
+.reduce .ms__sheet::before { display: none; }
+.reduce .ms__friends { min-height: 0; padding-bottom: 48px; }

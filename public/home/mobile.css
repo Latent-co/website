@@ -219,3 +219,8 @@
 .reduce .mr__beats .beat { margin: 0; }
 .reduce .mr__beats { gap: 14px; }
 .reduce .mr__ui { top: calc(var(--top) + 70px); }
+.reduce .mt__dots { display: none; }
+.mh__def { padding: 88px var(--pad) 24px; }
+.mh__def .hero__cap .w { opacity: 1; }
+.mh__def .cap__vis::after { --u: 1; }
+.reduce .mr__bars { display: none; }

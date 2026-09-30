@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { MotionConfig } from "framer-motion";
+import { startAnalytics } from "@/lib/analytics";
 
 /**
  * Global motion config. `reducedMotion="user"` makes every Framer Motion
@@ -9,5 +11,6 @@ import { MotionConfig } from "framer-motion";
  * "gentler, not zero" per Emil Kowalski's accessibility standard.
  */
 export default function Providers({ children }: { children: React.ReactNode }) {
+  useEffect(() => startAnalytics(), []);
   return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

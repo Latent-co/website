@@ -632,3 +632,30 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   .rec__dim { place-items: center; padding-bottom: 0; }
   .take__beats { min-height: 120px; }
 }
+
+/* ── quiet mode switch: the nav pill on desktop, a text button under the phone hero, a footer link ── */
+.nav__end { display: flex; align-items: center; gap: 10px; }
+.quiet { display: inline-flex; align-items: center; gap: 9px; height: 40px; padding: 0 14px 0 11px; border-radius: 999px; font: 600 13px/1 var(--sans); color: var(--text-2); background: rgba(14,13,12,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); cursor: pointer; transition: color .3s, box-shadow .3s; }
+.quiet:hover { color: var(--paper); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+.quiet__sw { position: relative; width: 26px; height: 16px; flex: none; border-radius: 8px; background: rgba(247,243,234,.18); transition: background-color .3s; }
+.quiet__sw::after { content: ""; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); transition: transform .3s var(--ease); }
+.quiet[aria-pressed="true"] { color: var(--paper); }
+.quiet[aria-pressed="true"] .quiet__sw { background: var(--paper); }
+.quiet[aria-pressed="true"] .quiet__sw::after { transform: translateX(10px); background: var(--bg); }
+.quiet--text { height: auto; padding: 6px 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; font-size: 14px; flex-wrap: wrap; column-gap: 9px; row-gap: 2px; }
+.quiet--text small { font-weight: 400; color: var(--text-3); font-size: 13px; }
+.quiet--text:hover { box-shadow: none; }
+.quiet--link { height: auto; padding: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; font: inherit; color: inherit; }
+.quiet--link:hover { box-shadow: none; }
+.quiet--link[aria-pressed="true"]::after { content: " · on"; color: var(--text-3); }
+@media (max-width: 720px) { .nav__end .quiet { display: none; } }
+
+/* quiet mode, desktop: one plain page. The pinned scenes' full-screen heights and their slide
+   tabs mean nothing here, so the sections sit at the page's normal rhythm. */
+.reduce .take__pin { min-height: 0; padding-top: 48px; padding-bottom: 0; }
+.reduce .step--track, .reduce .step--share { margin-top: clamp(72px, 10vh, 120px); }
+.reduce .track__pin, .reduce .share__pin { padding-top: 0; }
+.reduce .track__dots { display: none; }
+.reduce .track__rail { gap: clamp(56px, 8vh, 96px); }
+.reduce .track__panel { padding-bottom: 0; }
+.reduce .sheet--post { margin-top: 48px; }

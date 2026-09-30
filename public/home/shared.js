@@ -242,7 +242,7 @@
 
   // The edit tray (stickers / timers / trim / speed) driving the story it sits beside. Works on
   // whatever markup carries the data-ig-* / data-tray* hooks under `root`.
-  function makeTray(root, { reduce, tourMs = 1500 } = {}) {
+  function makeTray(root, { reduce, tourMs = 1500, onUse } = {}) {
     const tray = { tab: "stickers", sticker: "classic", timer: "none", auto: true, trim: [0, 1], speed: 1 };
     const igSticker = $("[data-ig-sticker]", root), igClock = $("[data-ig-clock]", root), igVideo = $("[data-ig-video]", root), igBar = $("[data-ig-bar]", root), grid = $("[data-tray-grid]", root);
     const tabBtns = $$("[data-tab-kind]", root);
@@ -277,14 +277,17 @@
       igClock.style.opacity = tray.timer === "none" ? 0 : 1;
       igVideo.playbackRate = tray.speed;
     }
+    // the first time someone (not the tour) works the tray
+    let used = false;
+    const noteUse = () => { if (!used && onUse) { used = true; onUse(tray.tab); } };
     grid.addEventListener("click", e => {
       const b = e.target.closest("[data-k]"); if (!b) return;
-      tray.auto = false;
+      tray.auto = false; noteUse();
       if (tray.tab === "stickers") tray.sticker = b.dataset.k; else tray.timer = b.dataset.k;
       drawTray();
     });
     tabBtns.forEach(b => b.addEventListener("click", () => {
-      tray.auto = false; tray.tab = b.dataset.tabKind;
+      tray.auto = false; tray.tab = b.dataset.tabKind; noteUse();
       if (tray.tab === "trim" && tray.trim[1] - tray.trim[0] > .99) { drawTray(); setTimeout(() => { tray.trim = [.12, .82]; drawTray(); }, 250); return; }
       drawTray();
     }));
@@ -302,7 +305,7 @@
     grid.addEventListener("pointerdown", e => {
       const strip = e.target.closest(".trim__strip"), track = e.target.closest(".speed__track, .speed__row");
       if (!strip && !track) return;
-      tray.auto = false;
+      tray.auto = false; noteUse();
       if (strip) { const f = frac(e, strip); drag = { kind: "trim", el: strip, edge: Math.abs(f - tray.trim[0]) < Math.abs(f - tray.trim[1]) ? 0 : 1 }; }
       else drag = { kind: "speed", el: grid.querySelector(".speed__track") };
       grid.setPointerCapture(e.pointerId); grid.classList.add("dragging");
@@ -384,6 +387,32 @@
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
+  }
+
+  /* ── quiet mode: the switch, and landing back where you were after it reloads ── */
+  const QUIET = document.documentElement.classList.contains("reduce");
+  $$("[data-quiet]").forEach(b => {
+    b.setAttribute("aria-pressed", String(QUIET));
+    b.addEventListener("click", () => {
+      try { localStorage.setItem("latent-quiet", QUIET ? "0" : "1"); } catch (e) {}
+      // remember the section being read; the other mode lays the page out differently
+      const mid = innerHeight / 2;
+      const here = $$("[data-section]").find(el => { const r = el.getBoundingClientRect(); return r.top <= mid && r.bottom >= mid; });
+      try { sessionStorage.setItem("latent-return", here && scrollY > 40 ? here.dataset.section : ""); } catch (e) {}
+      if (window.latentTrack) latentTrack("landing_quiet_toggled", { quiet: !QUIET, from_section: here ? here.dataset.section : null }, true);
+      const u = new URL(location.href); u.searchParams.delete("quiet");
+      setTimeout(() => location.replace(u), 120);          // let the event leave first
+    });
+  });
+  let back = null;
+  try { back = sessionStorage.getItem("latent-return"); sessionStorage.removeItem("latent-return"); } catch (e) {}
+  if (back) {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    addEventListener("load", () => setTimeout(() => {
+      const el = $(`[data-section="${back}"]`); if (!el) return;
+      if (window.__lenis) window.__lenis.scrollTo(el, { immediate: true, force: true });
+      else scrollTo(0, el.getBoundingClientRect().top + scrollY - 70);
+    }, 60));
   }
 
   window.LATENT = {

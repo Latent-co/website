@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { supabase } from "@/lib/supabase";
+import { track } from "@/lib/analytics";
 import "./survey.css";
 
 /* =========================================================================
@@ -207,6 +208,17 @@ export default function EarlyAccess() {
   const inForm = step >= FORM_START && step <= FORM_END;
   const pos = step - FORM_START; // 0-based within the form
   const isLast = step === STEPS.length - 1;
+
+  // Analytics: every screen reached, carrying the waitlist row's session_id so a PostHog
+  // visitor can be joined to their waitlist answers (and email) in the waitlist database,
+  // without the email itself ever going to PostHog.
+  useEffect(() => {
+    const st = STEPS[step];
+    const props = { step, step_type: st.type, step_key: st.key ?? st.type, form_steps: FORM_TOTAL, waitlist_session_id: responses.session_id ?? null };
+    track("early_access_step_viewed", props);
+    if (st.type === "final") track("early_access_completed", { ...props, has_email: !!responses.email, has_phone: !!responses.phone, pillar: responses.pillar ?? null, utm_source: responses.utm_source ?? null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
 
   // Final screen: emit() once on arrival, marking the row completed.
   useEffect(() => {

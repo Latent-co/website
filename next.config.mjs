@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // PostHog's API paths end in a slash (/e/, /decide/); without this Next 308s them.
+  skipTrailingSlashRedirect: true,
 
   // /early-access is served by this app now — see app/early-access/. It has been
   // through three shapes: it lived on the apex, then moved to its own deployment and
@@ -26,6 +28,12 @@ const nextConfig = {
         { source: "/", has: [{ type: "query", key: "mobile", value: "(?:.*)" }], destination: "/home/mobile.html" },
         { source: "/", has: [{ type: "header", key: "user-agent", value: phone }], destination: "/home/mobile.html" },
         { source: "/", destination: "/home/index.html" },
+      ],
+      // Analytics go to PostHog through this domain, not posthog.com, so ad blockers that
+      // drop third-party trackers don't silently cut the top off every funnel.
+      afterFiles: [
+        { source: "/ingest/static/:path*", destination: "https://us-assets.i.posthog.com/static/:path*" },
+        { source: "/ingest/:path*", destination: "https://us.i.posthog.com/:path*" },
       ],
     };
   },

@@ -5,4 +5,5 @@
   <url><loc>https://trylatent.co/early-access</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://trylatent.co/privacy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://trylatent.co/terms</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://trylatent.co/takedown</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

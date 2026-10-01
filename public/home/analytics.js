@@ -3,13 +3,13 @@
 
      $pageview / $pageleave      automatic; every event carries site_version + quiet
      landing_section_viewed      { section }   first time each section reaches mid-screen
-     landing_cta_clicked         { placement } which Join Early Access button (nav/hero/close/footer)
+     landing_cta_clicked         { placement } which App Store button (nav/hero/close/footer)
      landing_faq_opened          { question }
      landing_tray_used           { tab }       the first time someone works the edit tray
      landing_quiet_toggled       { quiet }
 
-   /early-access (the Next app) shares the cookie on this domain, so the funnel runs straight
-   through: landing_cta_clicked → early_access_step_viewed → early_access_completed.
+   Every call to action leaves for the App Store listing, so the web funnel ends at
+   landing_cta_clicked; installs are counted on the app side.
 
    Requests go to /ingest on this domain (proxied in next.config.mjs), because ad blockers
    drop requests to posthog.com and a funnel missing a third of its top is worse than none.
@@ -39,7 +39,7 @@
   const track = (event, props, now) => posthog.capture(event, props, now ? { send_instantly: true } : undefined);
   window.latentTrack = track;
 
-  // which Join Early Access button
+  // which App Store button
   document.addEventListener("click", e => {
     const a = e.target.closest("[data-cta]");
     if (a) track("landing_cta_clicked", { placement: a.dataset.cta }, true);

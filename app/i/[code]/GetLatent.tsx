@@ -39,12 +39,12 @@ export default function GetLatent({ code }: { code: string | null }) {
       >
         Get Latent
       </button>
-      {/* Universal links do not fire inside in-app browsers, so someone who already has
-          the app needs a way through from here. */}
+      {/* The app's invite screen is one big Paste button that reads this link back off the
+          clipboard. Say so here, because they leave for the store the moment they tap. */}
       {code && (
-        <a href={`latent://i/${code}`} className="text-[15px] text-paper-dim">
-          Open Latent
-        </a>
+        <p className="text-[15px] text-paper-dim">
+          Then open Latent and tap Paste.
+        </p>
       )}
     </div>
   );

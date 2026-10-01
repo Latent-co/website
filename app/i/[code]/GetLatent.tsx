@@ -1,7 +1,8 @@
 "use client";
 
-// Where "Get Latent" goes. Swap for the App Store URL once 1.0 is approved.
-const STORE_URL = "https://testflight.apple.com/join/bAn1FmPG";
+// Where "Get Latent" goes: the App Store listing (no storefront in the path, so Apple sends
+// each visitor to their own country's store).
+const STORE_URL = "https://apps.apple.com/app/id6788947658";
 
 /**
  * Copies the canonical invite link, whatever host served this page, because that is the

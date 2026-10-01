@@ -39,6 +39,13 @@ export default function GetLatent({ code }: { code: string | null }) {
       >
         Get Latent
       </button>
+      {/* The app reads this invite off the clipboard on first open, which iOS guards with a
+          one-time prompt. Say so here, because they leave for the store the moment they tap. */}
+      {code && (
+        <p className="text-[15px] text-paper-dim">
+          When Latent asks, tap Allow Paste.
+        </p>
+      )}
       {/* Universal links do not fire inside in-app browsers, so someone who already has
           the app needs a way through from here. */}
       {code && (

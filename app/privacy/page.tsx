@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: September 30, 2026
+          Effective Date: October 1, 2026
         </p>
 
         <p>
@@ -58,6 +58,11 @@ export default function PrivacyPolicy() {
         <ul>
           <li>Name, username, and email address</li>
           <li>Account credentials and authentication information</li>
+          <li>
+            Your age range (13&ndash;17 or 18 and over), worked out from the
+            birthday you enter when you sign up. We keep only the range, never
+            your birthday.
+          </li>
           <li>Profile information you choose to provide</li>
           <li>
             Information contained in posts, activities, tags, comments, or other
@@ -164,7 +169,8 @@ export default function PrivacyPolicy() {
           <li>
             <strong>Legal requirements:</strong> When reasonably necessary to
             comply with applicable law, legal process, court orders, or
-            governmental requests.
+            governmental requests, including reports of child sexual exploitation
+            to the National Center for Missing &amp; Exploited Children (NCMEC).
           </li>
           <li>
             <strong>Safety and security:</strong> When necessary to protect the
@@ -222,6 +228,15 @@ export default function PrivacyPolicy() {
         <p>
           You should not upload information that you do not want stored or shared
           through the Platform.
+        </p>
+        <p>
+          If an intimate image or video of you was shared on Latent without your
+          consent, you can ask us to remove it whether or not you use Latent. We
+          act on valid requests within 48 hours. See{" "}
+          <Link href="/takedown" className="underline hover:text-gold">
+            trylatent.co/takedown
+          </Link>
+          .
         </p>
 
         <h2>6. Data Retention</h2>
@@ -287,7 +302,9 @@ export default function PrivacyPolicy() {
         <h2>9. Children&rsquo;s Privacy</h2>
         <p>
           Latent is not intended for children under the age of 13, and we do not
-          knowingly collect personal information from children under 13.
+          knowingly collect personal information from children under 13. We ask
+          everyone for their birthday when they sign up. If the answer is under
+          13, we delete the account and its data immediately.
         </p>
         <p>
           If you believe that a child under 13 has provided personal information to

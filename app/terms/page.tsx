@@ -31,7 +31,7 @@ export default function TermsOfService() {
           Latent Terms of Service
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: September 30, 2026
+          Effective Date: October 1, 2026
         </p>
 
         <p>
@@ -62,6 +62,10 @@ export default function TermsOfService() {
           provide is accurate, and that you are not located in a country subject
           to a U.S. Government embargo and are not on any U.S. Government
           restricted-parties list.
+        </p>
+        <p>
+          We ask for your birthday when you create your account. If we learn
+          that an account belongs to someone under 13, we delete it.
         </p>
 
         <h2>2. Your Account</h2>
@@ -169,6 +173,23 @@ export default function TermsOfService() {
         <p>
           To report content or a user, use the in-app reporting tools, or contact
           us at <a href="mailto:support@trylatent.co">support@trylatent.co</a>.
+        </p>
+        <p>
+          <strong>Intimate images shared without consent.</strong> Anyone,
+          including people who do not use Latent, can ask us to remove an
+          intimate image or video of them that was shared without their consent.
+          We remove valid requests within 48 hours, along with any identical
+          copies we can find. See{" "}
+          <Link href="/takedown" className="underline hover:text-gold">
+            trylatent.co/takedown
+          </Link>{" "}
+          for how to make a request.
+        </p>
+        <p>
+          <strong>Child safety.</strong> We do not tolerate content that sexually
+          exploits or endangers minors. We remove it, preserve it as the law
+          requires, report it to the National Center for Missing &amp; Exploited
+          Children (NCMEC), and terminate the accounts involved.
         </p>
 
         <h2>8. Copyright and DMCA</h2>

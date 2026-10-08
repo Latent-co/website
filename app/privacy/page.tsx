@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: October 1, 2026
+          Effective Date: October 7, 2026
         </p>
 
         <p>
@@ -121,8 +121,22 @@ export default function PrivacyPolicy() {
           We may use cookies, SDKs, or similar technologies on our website and
           within the Platform for analytics, security, and functionality.
         </p>
+        <p>
+          We use PostHog for product analytics and Sentry for crash reports. You
+          can turn off analytics in the app at Settings &gt; Privacy &gt; Share
+          usage data. Crash reports stay on so we can find and fix bugs.
+        </p>
 
-        <h3>e. Payment Information</h3>
+        <h3>e. Advertising Information</h3>
+        <p>
+          Latent may show ads from third-party ad networks. When it does, those
+          networks may collect device identifiers, IP address, and how you
+          interact with ads, to show ads, measure them, and prevent fraud. If you
+          allow it, they may also use this information to personalize the ads you
+          see. We do not show personalized ads to users under 18.
+        </p>
+
+        <h3>f. Payment Information</h3>
         <p>
           If Latent offers paid subscriptions or other purchases, payments may be
           processed by third-party payment providers. We generally do not
@@ -146,6 +160,7 @@ export default function PrivacyPolicy() {
             technical problems
           </li>
           <li>Analyze Platform usage and develop new features</li>
+          <li>Show and measure ads, and promote Latent</li>
           <li>Comply with applicable laws and legal obligations</li>
         </ul>
         <p>
@@ -190,6 +205,16 @@ export default function PrivacyPolicy() {
         <p>
           We do <strong>not sell your personal information</strong> to third
           parties.
+        </p>
+        <p>
+          We may share limited information, such as device identifiers and app
+          events like installs or sign-ups, with advertising partners to show
+          ads in Latent, measure them, and promote Latent. You can turn off this
+          sharing and personalized ads in the app at Settings &gt; Privacy &gt;
+          Share usage data. You may still see ads that are not personalized. On
+          iOS, tracking across other companies&rsquo; apps and websites also
+          needs your permission through Apple&rsquo;s App Tracking Transparency
+          prompt.
         </p>
 
         <h2>4. Camera and Timelapse Privacy</h2>
@@ -286,6 +311,10 @@ export default function PrivacyPolicy() {
           <li>Withdraw consent where processing is based on consent</li>
           <li>Request a copy of certain information in a portable format</li>
           <li>Opt out of certain promotional communications</li>
+          <li>
+            Turn off analytics, advertising sharing, and personalized ads in the
+            app at Settings &gt; Privacy &gt; Share usage data
+          </li>
         </ul>
         <p>
           You may also control certain permissions, including camera access,
@@ -318,6 +347,18 @@ export default function PrivacyPolicy() {
           including analytics, authentication, cloud infrastructure, payment
           processing, and other service providers.
         </p>
+        <p>The service providers we use include:</p>
+        <ul>
+          <li>Supabase: accounts, sessions, friends, and messages</li>
+          <li>Cloudflare: storage for session videos and photos</li>
+          <li>PostHog: product analytics</li>
+          <li>Sentry: crash reports and app performance</li>
+          <li>Apple and Google: sign-in and push notifications</li>
+          <li>
+            Advertising partners, such as Google, Meta, AppLovin, or TikTok, if
+            we show ads in Latent or run ads to promote it
+          </li>
+        </ul>
         <p>
           Those third parties may process information according to their own
           privacy policies and terms. We encourage you to review the privacy

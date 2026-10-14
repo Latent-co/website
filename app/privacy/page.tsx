@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: October 7, 2026
+          Effective Date: October 14, 2026
         </p>
 
         <p>
@@ -143,6 +143,27 @@ export default function PrivacyPolicy() {
           directly store your full payment card information.
         </p>
 
+        <h3>g. Waitlist and Access Texts</h3>
+        <p>
+          Latent is invite only. If you join the waitlist, on our website or on
+          the invite code screen in the app, we collect the email address or
+          phone number you give us, along with any answers you choose to
+          provide.
+        </p>
+        <p>
+          If you give us your phone number, we use it to send you a text with an
+          invite when a spot opens. Message and data rates may apply. Reply STOP
+          to any text to stop receiving them, or HELP for help. Giving us your
+          number is optional and is not needed to use Latent.
+        </p>
+        <p>
+          We do not sell your phone number, and we do not share it, or your
+          consent to receive texts, with third parties or affiliates for their
+          marketing. We share it only with the text-messaging provider that
+          delivers our texts. We do not send your phone number to our analytics
+          or crash-reporting providers.
+        </p>
+
         <h2>2. How We Use Your Information</h2>
         <p>We may use the information we collect to:</p>
         <ul>
@@ -153,6 +174,10 @@ export default function PrivacyPolicy() {
           <li>Maintain and improve the Platform</li>
           <li>
             Communicate with you about your account, updates, or support requests
+          </li>
+          <li>
+            Text you an invite when a spot opens, if you joined the waitlist with
+            your phone number
           </li>
           <li>Process subscriptions and payments</li>
           <li>
@@ -354,6 +379,10 @@ export default function PrivacyPolicy() {
           <li>PostHog: product analytics</li>
           <li>Sentry: crash reports and app performance</li>
           <li>Apple and Google: sign-in and push notifications</li>
+          <li>
+            A text-messaging provider: delivering access texts to people on the
+            waitlist
+          </li>
           <li>
             Advertising partners, such as Google, Meta, AppLovin, or TikTok, if
             we show ads in Latent or run ads to promote it

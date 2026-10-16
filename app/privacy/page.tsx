@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: October 14, 2026
+          Effective Date: October 16, 2026
         </p>
 
         <p>
@@ -59,9 +59,9 @@ export default function PrivacyPolicy() {
           <li>Name, username, and email address</li>
           <li>Account credentials and authentication information</li>
           <li>
-            Your age range (13&ndash;17 or 18 and over), worked out from the
-            birthday you enter when you sign up. We keep only the range, never
-            your birthday.
+            Your birthday, which you enter when you sign up, and the age range we
+            work out from it (13&ndash;17 or 18 and over). Your birthday is never
+            shown on your profile or to anyone else on Latent.
           </li>
           <li>Profile information you choose to provide</li>
           <li>
@@ -122,9 +122,10 @@ export default function PrivacyPolicy() {
           within the Platform for analytics, security, and functionality.
         </p>
         <p>
-          We use PostHog for product analytics and Sentry for crash reports. You
-          can turn off analytics in the app at Settings &gt; Privacy &gt; Share
-          usage data. Crash reports stay on so we can find and fix bugs.
+          We use PostHog for product analytics and Sentry for crash reports. We
+          send PostHog your birth year, never your full birthday. You can turn
+          off analytics in the app at Settings &gt; Privacy &gt; Share usage
+          data. Crash reports stay on so we can find and fix bugs.
         </p>
 
         <h3>e. Advertising Information</h3>
@@ -358,7 +359,11 @@ export default function PrivacyPolicy() {
           Latent is not intended for children under the age of 13, and we do not
           knowingly collect personal information from children under 13. We ask
           everyone for their birthday when they sign up. If the answer is under
-          13, we delete the account and its data immediately.
+          13 when you sign up, we delete the account and its data immediately.
+          If an existing account enters a birthday under 13, we put it on hold:
+          its posts are hidden from everyone and we email the account&rsquo;s
+          address. If the date was a mistake, reply and we&rsquo;ll put it right.
+          Otherwise we delete the account and its data after 30 days.
         </p>
         <p>
           If you believe that a child under 13 has provided personal information to

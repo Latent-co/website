@@ -54,8 +54,16 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // Founding testers were handed /waitlist back when the waitlist owned the apex.
-      { source: "/waitlist", destination: "/early-access", permanent: false },
+      // The waitlist is closed: Latent is on the App Store (2026-10-01) and every waitlist
+      // signup has been emailed an invite (2026-10-16). The survey kept collecting people
+      // from Google, Instagram and ChatGPT into a list nobody would ever mail again, so its
+      // URLs now go to the invite page instead. Not the bare App Store link: the invite gate
+      // is on, and someone who installs with no code is stranded at it. /i/KPCWC4 copies the
+      // code before handing them to the store, so the app reads it back on first open.
+      // KPCWC4 is the code every waitlist email carried. Temporary (307) on purpose, and the
+      // survey page is left in app/early-access: deleting these two lines reopens it.
+      { source: "/early-access", destination: "/i/KPCWC4", permanent: false },
+      { source: "/waitlist", destination: "/i/KPCWC4", permanent: false },
     ];
   },
 };

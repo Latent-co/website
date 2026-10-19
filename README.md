@@ -29,9 +29,8 @@ Preview locally with `npm run dev` and open http://localhost:3000 (add `?mobile=
 A new asset goes in `public/home/assets/` and is referenced relatively (`assets/…`).
 
 **Quiet mode** swaps the scroll scenes for a plain page: the `reduce` class on `<html>`, set by a
-script in each page's `<head>` before first paint. The visitor's switch (localStorage
-`latent-quiet`, or `?quiet=1` / `?quiet=0`) wins; with no choice made it follows the OS Reduce
-Motion setting and Data Saver.
+script in each page's `<head>` before first paint. It follows the OS Reduce Motion setting and
+Data Saver; `?quiet=1` / `?quiet=0` forces one.
 
 ## Analytics
 
@@ -46,7 +45,6 @@ no autocapture, no session replay, and no person profile for anonymous visitors.
 | `landing_discord_clicked` | `placement` (footer) |
 | `landing_faq_opened` | `question` |
 | `landing_tray_used` | `tab` — the first time someone works the edit tray |
-| `landing_quiet_toggled` | `quiet`, `from_section` |
 | `early_access_step_viewed` | `step`, `step_key`, `waitlist_session_id` |
 | `early_access_completed` | `pillar`, `has_email`, `has_phone`, `utm_source`, `waitlist_session_id` |
 

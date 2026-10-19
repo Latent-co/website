@@ -4,6 +4,7 @@
      $pageview / $pageleave      automatic; every event carries site_version + quiet
      landing_section_viewed      { section }   first time each section reaches mid-screen
      landing_cta_clicked         { placement } which App Store button (nav/hero/close/footer)
+     landing_discord_clicked     { placement } the Discord invite (footer)
      landing_faq_opened          { question }
      landing_tray_used           { tab }       the first time someone works the edit tray
      landing_quiet_toggled       { quiet }
@@ -43,6 +44,8 @@
   document.addEventListener("click", e => {
     const a = e.target.closest("[data-cta]");
     if (a) track("landing_cta_clicked", { placement: a.dataset.cta }, true);
+    const d = e.target.closest("[data-discord]");
+    if (d) track("landing_discord_clicked", { placement: d.dataset.discord }, true);
   });
 
   // each section once, when it first reaches the middle of the screen

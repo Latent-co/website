@@ -460,7 +460,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .foot { border-top: 1px solid var(--border); }
 .foot .wrap { display: flex; align-items: center; gap: 28px; padding-top: 36px; padding-bottom: 36px; flex-wrap: wrap; }
 .foot img { height: 22px; width: auto; }
-.foot nav { display: flex; gap: 22px; margin-left: auto; font-size: 14px; color: var(--text-2); }
+.foot nav { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-left: auto; font-size: 14px; color: var(--text-2); }
+.foot nav > * { white-space: nowrap; }
 .foot nav a:hover { color: var(--paper); }
 .foot small { font-size: 13px; color: var(--text-3); }
 

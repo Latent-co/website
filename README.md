@@ -43,6 +43,7 @@ no autocapture, no session replay, and no person profile for anonymous visitors.
 | `$pageview`, `$pageleave` | `site_version` (desktop / mobile), `quiet` |
 | `landing_section_viewed` | `section` (hero, record, track, share, voices, faq, close), `order` |
 | `landing_cta_clicked` | `placement` (nav, hero, close, footer) |
+| `landing_discord_clicked` | `placement` (footer) |
 | `landing_faq_opened` | `question` |
 | `landing_tray_used` | `tab` — the first time someone works the edit tray |
 | `landing_quiet_toggled` | `quiet`, `from_section` |

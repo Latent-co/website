@@ -4,9 +4,9 @@
      $pageview / $pageleave      automatic; every event carries site_version + quiet
      landing_section_viewed      { section }   first time each section reaches mid-screen
      landing_cta_clicked         { placement } which App Store button (nav/hero/close/footer)
+     landing_discord_clicked     { placement } the Discord invite (footer)
      landing_faq_opened          { question }
      landing_tray_used           { tab }       the first time someone works the edit tray
-     landing_quiet_toggled       { quiet }
 
    Every call to action leaves for the App Store listing, so the web funnel ends at
    landing_cta_clicked; installs are counted on the app side.
@@ -35,7 +35,7 @@
   posthog.register({ surface: "website", site_version: version, quiet: document.documentElement.classList.contains("reduce") });
 
   // `now`: send at once instead of waiting for the next batch, for events that happen
-  // just before the page goes away (a CTA click, the quiet-mode reload)
+  // just before the page goes away (a CTA click)
   const track = (event, props, now) => posthog.capture(event, props, now ? { send_instantly: true } : undefined);
   window.latentTrack = track;
 
@@ -43,6 +43,8 @@
   document.addEventListener("click", e => {
     const a = e.target.closest("[data-cta]");
     if (a) track("landing_cta_clicked", { placement: a.dataset.cta }, true);
+    const d = e.target.closest("[data-discord]");
+    if (d) track("landing_discord_clicked", { placement: d.dataset.discord }, true);
   });
 
   // each section once, when it first reaches the middle of the screen

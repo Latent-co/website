@@ -23,18 +23,16 @@
   <link rel="preload" href="assets/media/montage-poster.jpg" as="image">
   <script>
     // Quiet mode: no scroll scenes, no motion, a plain page to scroll. Decided here, before the
-    // first paint, so the page never flashes the animated version. The visitor's own choice
-    // (the Quiet mode switch, saved in localStorage, or ?quiet=1 / ?quiet=0) wins; with no
-    // choice made, it follows the OS "Reduce Motion" setting and Data Saver.
+    // first paint, so the page never flashes the animated version. Follows the OS "Reduce
+    // Motion" setting and Data Saver; ?quiet=1 / ?quiet=0 forces one (for testing).
     (function () {
-      var q = null, m = /[?&]quiet=(1|0)\b/.exec(location.search);
-      try { q = localStorage.getItem("latent-quiet"); } catch (e) {}
-      if (m) q = m[1];
+      var m = /[?&]quiet=(1|0)\b/.exec(location.search), q = m ? m[1] : null;
+      try { localStorage.removeItem("latent-quiet"); } catch (e) {}  // the old switch's saved choice
       var auto = matchMedia("(prefers-reduced-motion: reduce)").matches || (navigator.connection && navigator.connection.saveData);
       if (q === "1" || (q === null && auto)) document.documentElement.classList.add("reduce");
     })();
   </script>
-  <link rel="stylesheet" href="site.css?v=bce8418565">
+  <link rel="stylesheet" href="site.css?v=0307248889">
 </head>
 <body>
   <header class="nav" data-nav>
@@ -314,16 +312,15 @@
     <div class="wrap">
       <img src="assets/img/wordmark.png" alt="Latent." width="75" height="22">
       <small>© 2026 Latent</small>
-      <nav><a href="https://apps.apple.com/us/app/latent-focus-camera/id6788947658" data-cta="footer">App Store</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><button type="button" class="quiet quiet--link" data-quiet aria-pressed="false"><span>Quiet mode</span></button></nav>
+      <nav><a href="https://apps.apple.com/us/app/latent-focus-camera/id6788947658" data-cta="footer">App Store</a><a href="https://discord.gg/NQBfWz6Zdr" target="_blank" rel="noopener" data-discord="footer">Discord</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
     </div>
   </footer>
 
-  <button type="button" class="quiet quiet--float" data-quiet aria-pressed="false" aria-label="Quiet mode: less motion, easy scrolling"><span class="quiet__sw" aria-hidden="true"></span><span>Quiet mode</span></button>
   <script src="vendor/gsap.min.js?v=9396f25632"></script>
   <script src="vendor/ScrollTrigger.min.js?v=05ca5ad88c"></script>
   <script src="vendor/lenis.min.js?v=b5cf15f07d"></script>
-  <script src="shared.js?v=c97226051b"></script>
+  <script src="shared.js?v=f667b1c5af"></script>
   <script src="site.js?v=1c689f7854"></script>
-  <script src="analytics.js?v=19d570b0d2"></script>
+  <script src="analytics.js?v=ffbc88c4b6"></script>
 </body>
 </html>

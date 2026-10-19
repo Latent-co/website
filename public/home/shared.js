@@ -392,61 +392,6 @@
     requestAnimationFrame(tick);
   }
 
-  /* ── quiet mode: the switch, and landing back where you were after it reloads ── */
-  const QUIET = document.documentElement.classList.contains("reduce");
-  $$("[data-quiet]").forEach(b => {
-    b.setAttribute("aria-pressed", String(QUIET));
-    b.addEventListener("click", () => {
-      try { localStorage.setItem("latent-quiet", QUIET ? "0" : "1"); } catch (e) {}
-      // remember the section being read; the other mode lays the page out differently
-      const mid = innerHeight / 2;
-      const here = $$("[data-section]").find(el => { const r = el.getBoundingClientRect(); return r.top <= mid && r.bottom >= mid; });
-      try { sessionStorage.setItem("latent-return", here && scrollY > 40 ? here.dataset.section : ""); } catch (e) {}
-      if (window.latentTrack) latentTrack("landing_quiet_toggled", { quiet: !QUIET, from_section: here ? here.dataset.section : null }, true);
-      const u = new URL(location.href); u.searchParams.delete("quiet");
-      setTimeout(() => location.replace(u), 120);          // let the event leave first
-    });
-  });
-  // The corner pill steps aside whenever it would sit on something someone might read or tap
-  // (a button, a link, a heading, the edit tray, the footer), and shrinks to the bare toggle
-  // once the page is scrolled. Checked against what is actually under it, on every screen
-  // size, rather than a list of places.
-  const pill = $(".quiet--float");
-  if (pill) {
-    const KEEP_CLEAR = "a[href], button, h1, h2, h4, .tile, .tray, .dests, .ms__dests, .panel__streak, .foot";
-    let queued = false;
-    const check = () => {
-      queued = false;
-      pill.classList.toggle("is-mini", scrollY > 240 || innerWidth <= 380);
-      const r = pill.getBoundingClientRect(), pad = 6;
-      const pts = [[r.left + pad, r.top + pad], [r.right - pad, r.top + pad], [r.left + pad, r.bottom - pad], [r.right - pad, r.bottom - pad], [(r.left + r.right) / 2, (r.top + r.bottom) / 2]];
-      const covers = pts.some(([x, y]) => document.elementsFromPoint(x, y).some(el => !pill.contains(el) && el.closest(KEEP_CLEAR)));
-      pill.classList.toggle("is-away", covers);
-    };
-    // at most ~6x a second (hit-testing on every scroll event cost a frame's worth of work),
-    // and two frames late, because the scroll scenes move their content the frame after
-    let lastCheck = 0;
-    const queue = () => {
-      if (queued) return; queued = true;
-      const wait = Math.max(0, 160 - (performance.now() - lastCheck));
-      setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(() => { lastCheck = performance.now(); check(); })), wait);
-    };
-    addEventListener("scroll", queue, { passive: true });
-    addEventListener("resize", queue);
-    setInterval(queue, 700);                                // content that moves on its own
-    check();
-  }
-  let back = null;
-  try { back = sessionStorage.getItem("latent-return"); sessionStorage.removeItem("latent-return"); } catch (e) {}
-  if (back) {
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-    addEventListener("load", () => setTimeout(() => {
-      const el = $(`[data-section="${back}"]`); if (!el) return;
-      if (window.__lenis) window.__lenis.scrollTo(el, { immediate: true, force: true });
-      else scrollTo(0, el.getBoundingClientRect().top + scrollY - 70);
-    }, 60));
-  }
-
   window.LATENT = {
     $, $$, clamp01, lerp, smooth, pad2, hm, hms, ms,
     S, SESSIONS, byF, tile, place,

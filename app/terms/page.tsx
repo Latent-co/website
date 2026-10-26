@@ -31,7 +31,7 @@ export default function TermsOfService() {
           Latent Terms of Service
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: October 1, 2026
+          Effective Date: October 26, 2026
         </p>
 
         <p>
@@ -169,6 +169,12 @@ export default function TermsOfService() {
           appropriate, act on them promptly — including removing content and
           removing the users who provided it. We may remove content or suspend or
           terminate accounts that violate these Terms, with or without notice.
+        </p>
+        <p>
+          <strong>Report honestly.</strong> Do not file reports you know are
+          false, or use reports to harass, intimidate, or silence other users.
+          Misusing reporting is a violation of these Terms and may result in
+          suspension or termination of your account.
         </p>
         <p>
           To report content or a user, use the in-app reporting tools, or contact

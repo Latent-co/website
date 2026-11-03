@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: October 16, 2026
+          Effective Date: November 2, 2026
         </p>
 
         <p>
@@ -309,6 +309,16 @@ export default function PrivacyPolicy() {
           When you delete content, such as a session or a message you sent, we
           remove it from the Platform. Deleted information may remain in our
           backups for up to 30 days before it is permanently erased.
+        </p>
+        <p>
+          If a post or comment has been reported, we keep a copy of it for our
+          moderators while the report is open, even if it is deleted. The copy
+          includes its photos or videos, its comments, who it was shared with,
+          and who viewed it. We keep it for up to 30 days and delete it when the
+          report is closed. If we take action on a report, we keep a record of
+          the content and our decision for as long as needed to enforce our
+          policies and meet legal obligations, such as preserving reports of
+          child sexual exploitation for NCMEC.
         </p>
 
         <h2>7. Security</h2>

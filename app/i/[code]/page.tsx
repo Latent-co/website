@@ -13,11 +13,13 @@ import GetLatent from "./GetLatent";
  */
 type Props = { params: { code: string } };
 
-// Same alphabet as the app's codes (no 0/O, 1/I/L). Anything else still gets the page,
-// just without a code to hand over.
+// Only the shape of a code, not its alphabet. Generated codes are six characters with no
+// 0/O, 1/I/L, but hand-picked shared codes are not (LARPY, LATENT2026), and the server is
+// what decides whether a code is good. Anything else still gets the page, just without a
+// code to hand over.
 function clean(code: string) {
   const c = code.toUpperCase().replace(/[^A-Z0-9]/g, "");
-  return /^[A-HJKMNP-Z2-9]{6}$/.test(c) ? c : null;
+  return /^[A-Z0-9]{4,12}$/.test(c) ? c : null;
 }
 
 export function generateMetadata(): Metadata {

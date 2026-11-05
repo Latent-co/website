@@ -6,18 +6,26 @@ import GetLatent from "./GetLatent";
  * A friend's invite: `trylatent.co/i/<CODE>`, the only thing the app's share message sends.
  *
  * With the app installed this page never shows: the link is a universal link
- * (public/.well-known/apple-app-site-association) and opens the app, code in the URL.
- * Without it, Apple carries nothing through an install, so the one button copies this
- * link before opening the store and the app reads it back off the clipboard on first open.
+ * (public/.well-known/apple-app-site-association) and opens the app, code in the URL. The
+ * app only reads a six-character code from a URL, so a hand-picked code of any other length
+ * (LARPY) opens the app with nothing.
+ * Without the app, Apple carries nothing through an install, so the one button copies this
+ * link before opening the store and the person pastes it at the app's invite screen.
  * That button is the whole page, because a browser only lets a page copy on a tap.
  */
 type Props = { params: { code: string } };
 
-// Same alphabet as the app's codes (no 0/O, 1/I/L). Anything else still gets the page,
-// just without a code to hand over.
+// Only the shape of a code, not its alphabet. Generated codes are six characters with no
+// 0/O, 1/I/L, but hand-picked shared codes are not (LARPY, LATENT2026), and the server is
+// what decides whether a code is good. Anything else still gets the page, just without a
+// code to hand over.
+//
+// Next passes `code` percent-encoded (never malformed: a bad escape is a 400 before it gets
+// here), so decode it first. A stray comma on a link arrives as LARPY%2C, and stripping only
+// the % would copy LARPY2C, a code nobody was sent. Strip, then upper-case, as the server does.
 function clean(code: string) {
-  const c = code.toUpperCase().replace(/[^A-Z0-9]/g, "");
-  return /^[A-HJKMNP-Z2-9]{6}$/.test(c) ? c : null;
+  const c = decodeURIComponent(code).replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+  return c.length >= 4 && c.length <= 12 ? c : null;
 }
 
 export function generateMetadata(): Metadata {

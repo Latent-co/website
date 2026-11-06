@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: October 16, 2026
+          Effective Date: November 6, 2026
         </p>
 
         <p>
@@ -165,6 +165,52 @@ export default function PrivacyPolicy() {
           or crash-reporting providers.
         </p>
 
+        <h3>h. Your Contacts</h3>
+        <p>
+          Connecting your contacts is optional. If you allow it through your
+          device, Latent can help you find and invite people you know.
+        </p>
+        <p>
+          <strong>Finding friends.</strong> We send the email addresses and
+          phone numbers in your contacts to our servers and compare them with
+          the verified emails and phone numbers of Latent accounts. We use them
+          only for that check, and we do not keep them afterward. This applies
+          to everyone in your contacts, whether or not they use Latent. We do
+          not send your contacts&rsquo; names or photos to our servers. The
+          app may keep the result of a check on your device for up to a day, so
+          it does not need to check again.
+        </p>
+        <p>
+          <strong>Inviting friends.</strong> Where the app offers it, Latent
+          reads the names, phone numbers, and whether a contact has a photo on
+          your device, so you can choose someone to invite. That information
+          stays on your device. An invite is a text you review and send yourself
+          from your phone; Latent does not text your contacts. The app remembers
+          on your device who you have invited, so you do not invite them twice.
+        </p>
+        <p>
+          We do not sell your contacts, and we do not send them to our analytics,
+          crash-reporting, or advertising partners. You can turn off contacts
+          access at any time in your device settings.
+        </p>
+        <h3>i. Your Phone Number and Being Found by Friends</h3>
+        <p>
+          Adding a phone number to your account is optional. If you add one,
+          Google Firebase sends you a text with a code to confirm the number is
+          yours. We store the confirmed number so that friends who have it in
+          their contacts can find you. It is not shown on your profile, and we
+          do not send it to our analytics or crash-reporting providers. You can
+          remove it at any time in the app from Edit profile.
+        </p>
+        <p>
+          Unless you turn it off, other people on Latent may see your name,
+          username, and profile photo if they have your verified email or phone
+          number in their contacts, or as a suggestion if you have friends in
+          common. To stop this, turn off Let people find you in the app at
+          Settings &gt; Privacy. Accounts of people under 18 can be found through
+          contacts only by others under 18 or by someone they already have a
+          connection with on Latent.
+        </p>
         <h2>2. How We Use Your Information</h2>
         <p>We may use the information we collect to:</p>
         <ul>
@@ -172,6 +218,10 @@ export default function PrivacyPolicy() {
           <li>Record and display focus sessions and productivity history</li>
           <li>Generate timelapses, productivity insights, and analytics</li>
           <li>Personalize your experience</li>
+          <li>
+            Help you find people you know on Latent and suggest friends, and help
+            friends find you
+          </li>
           <li>Maintain and improve the Platform</li>
           <li>
             Communicate with you about your account, updates, or support requests
@@ -206,6 +256,12 @@ export default function PrivacyPolicy() {
           <li>
             <strong>With your direction:</strong> When you choose to share content
             or make information publicly visible through Platform features.
+          </li>
+          <li>
+            <strong>People who know you:</strong> Your name, username, and profile
+            photo, when someone has your verified email or phone number in their
+            contacts or you have friends in common, unless you turn this off as
+            described in Section 1(i).
           </li>
           <li>
             <strong>Legal requirements:</strong> When reasonably necessary to
@@ -311,6 +367,11 @@ export default function PrivacyPolicy() {
           backups for up to 30 days before it is permanently erased.
         </p>
 
+        <p>
+          Email addresses and phone numbers from your contacts are not kept after
+          we check them. A phone number you confirm stays on your account until
+          you remove it or delete your account.
+        </p>
         <h2>7. Security</h2>
         <p>
           We use reasonable administrative, technical, and organizational
@@ -341,10 +402,15 @@ export default function PrivacyPolicy() {
             Turn off analytics, advertising sharing, and personalized ads in the
             app at Settings &gt; Privacy &gt; Share usage data
           </li>
+          <li>
+            Stop people from finding you by your email, phone number, or mutual
+            friends in the app at Settings &gt; Privacy &gt; Let people find you
+          </li>
+          <li>Remove your phone number in the app from Edit profile</li>
         </ul>
         <p>
-          You may also control certain permissions, including camera access,
-          through your device settings.
+          You may also control certain permissions, including camera and contacts
+          access, through your device settings.
         </p>
         <p>
           To exercise applicable privacy rights, contact us at{" "}
@@ -384,6 +450,7 @@ export default function PrivacyPolicy() {
           <li>PostHog: product analytics</li>
           <li>Sentry: crash reports and app performance</li>
           <li>Apple and Google: sign-in and push notifications</li>
+          <li>Google Firebase: confirming a phone number you add</li>
           <li>
             A text-messaging provider: delivering access texts to people on the
             waitlist

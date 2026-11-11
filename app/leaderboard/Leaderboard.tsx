@@ -34,8 +34,16 @@ const PT = new Intl.DateTimeFormat("en-US", {
 });
 const when = (iso: string) => `${PT.format(new Date(iso)).replace(":00", "")} PT`;
 
-// Points are sums of halves (1, 0.5, 0.25 ...): show them exactly, without a trail of zeros.
-const pts = (n: number) => String(Number(n.toFixed(4)));
+// Points are sums of halves (1, 0.5, 0.25 ...), exact in a double: show every digit they have
+// (3.03125, not 3.0313), without a trail of zeros.
+const pts = (n: number) => String(Number(n.toPrecision(12)));
+
+// Browsers that block site data throw on any localStorage call; the board must still open.
+const store = {
+  get: () => { try { return localStorage.getItem(SAVED); } catch { return null; } },
+  set: (v: string) => { try { localStorage.setItem(SAVED, v); } catch {} },
+  clear: () => { try { localStorage.removeItem(SAVED); } catch {} },
+};
 
 function ago(iso: string | null, now: number) {
   if (!iso) return "not yet";
@@ -66,13 +74,13 @@ export default function Leaderboard() {
       const got = await lookUp(name);
       if (got.ok) {
         username.current = got.me.username;
-        localStorage.setItem(SAVED, got.me.username);
+        store.set(got.me.username);
         setBoard(got);
         setStale(false);
       } else if (got.reason === "rate_limited") {
         setMessage("Too many lookups from this network. Try again in a little while.");
       } else {
-        localStorage.removeItem(SAVED);
+        store.clear();
         setMessage(
           "That username isn't on the contest list. Use the Latent username you put on the form, without the @.",
         );
@@ -87,7 +95,7 @@ export default function Leaderboard() {
 
   // A returning contestant opens straight onto the board.
   useEffect(() => {
-    const saved = localStorage.getItem(SAVED);
+    const saved = store.get();
     if (saved) {
       setInput(saved);
       open(saved, false);
@@ -100,9 +108,12 @@ export default function Leaderboard() {
     if (!hasBoard) return;
     const tick = async () => {
       setNow(Date.now());
-      if (document.visibilityState !== "visible" || !username.current) return;
+      const asked = username.current;
+      if (document.visibilityState !== "visible" || !asked) return;
       try {
-        const got = await lookUp(username.current);
+        const got = await lookUp(asked);
+        // "Not you?" may have been pressed while this was in flight: never bring that board back.
+        if (username.current !== asked) return;
         if (got.ok) {
           setBoard(got);
           setStale(false);
@@ -110,7 +121,7 @@ export default function Leaderboard() {
           setStale(true);
         }
       } catch {
-        setStale(true);
+        if (username.current === asked) setStale(true);
       }
     };
     const id = window.setInterval(tick, REFRESH_MS);
@@ -247,7 +258,7 @@ export default function Leaderboard() {
 
       <button
         onClick={() => {
-          localStorage.removeItem(SAVED);
+          store.clear();
           username.current = null;
           setBoard(null);
           setInput("");

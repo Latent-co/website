@@ -82,7 +82,7 @@ export default function Leaderboard() {
       } else {
         store.clear();
         setMessage(
-          "That username isn't on the contest list. Use the Latent username you put on the form, without the @.",
+          "That username isn't on the contest list. Use the Latent username you put on the form.",
         );
       }
       if (fromForm) track("leaderboard_lookup", { found: got.ok, reason: got.ok ? null : got.reason });

@@ -64,6 +64,8 @@ const nextConfig = {
       // survey page is left in app/early-access: deleting these two lines reopens it.
       { source: "/early-access", destination: "/i/KPCWC4", permanent: false },
       { source: "/waitlist", destination: "/i/KPCWC4", permanent: false },
+      // The growth challenge leaderboard moved from /leaderboard to /challenge (2026-11).
+      { source: "/leaderboard", destination: "/challenge", permanent: true },
     ];
   },
 };

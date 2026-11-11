@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { supabase } from "@/lib/supabase";
 import { track } from "@/lib/analytics";
+import "./leaderboard.css";
 
 type Row = { rank: number; points: number; pending: number };
 type Board = {
@@ -142,19 +143,19 @@ export default function Leaderboard() {
 
   if (!board) {
     return (
-      <section className="mt-16 flex flex-col">
-        <h1 className="font-kalix text-[40px] leading-[1.05] tracking-tight text-paper">
-          Leaderboard
-        </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-paper-dim">
+      <section className="lb-gate">
+        <p className="lb-label">Growth challenge</p>
+        <h1 className="lb-title">Leaderboard</h1>
+        <p className="lb-lede">
           Enter the Latent username you signed up for the challenge with to see where you stand.
         </p>
-        <form onSubmit={submit} className="mt-8 flex flex-col gap-3">
-          <label htmlFor="username" className="label text-[11px] text-paper-faint">
+        <form onSubmit={submit} className="lb-form">
+          <label htmlFor="username" className="lb-label">
             Latent username
           </label>
           <input
             id="username"
+            className="lb-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             autoComplete="username"
@@ -162,17 +163,12 @@ export default function Leaderboard() {
             autoCorrect="off"
             spellCheck={false}
             placeholder="yourname"
-            className="w-full rounded-2xl border border-ink-line bg-ink-raised px-4 py-4 text-[17px] text-paper placeholder:text-paper-faint focus:border-gold/60 focus:outline-none"
           />
-          <button
-            type="submit"
-            disabled={busy || !input.trim()}
-            className="mt-2 w-full rounded-full bg-paper py-4 text-[17px] font-semibold text-ink transition-transform active:scale-[0.98] disabled:opacity-40"
-          >
+          <button type="submit" className="lb-btn" disabled={busy || !input.trim()}>
             {busy ? "Looking…" : "See the leaderboard"}
           </button>
           {message && (
-            <p role="alert" className="text-[14px] leading-relaxed text-paper-dim">
+            <p role="alert" className="lb-note">
               {message}
             </p>
           )}
@@ -193,77 +189,67 @@ export default function Leaderboard() {
         : `Invites closed. People who joined have until ${when(board.qualify_by)} to record 25 minutes.`;
 
   return (
-    <section className="mt-10 flex flex-col">
-      <div className="rounded-3xl border border-ink-line bg-ink-raised p-6">
-        <p className="label text-[11px] text-paper-faint">@{board.me.username}</p>
-        <p className="mt-3 font-kalix text-[44px] leading-none tracking-tight text-paper">
+    <section className="lb-board">
+      <div className="lb-card">
+        <p className="lb-label">@{board.me.username}</p>
+        <p className="lb-rank">
           #{board.me.rank}
-          <span className="ml-2 align-middle text-[17px] font-sans tracking-normal text-paper-dim">
-            of {board.total}
-          </span>
+          <span className="lb-of">of {board.total}</span>
         </p>
-        <div className="mt-5 flex gap-8">
+        <div className="lb-stats">
           <div>
-            <p className="numeric text-[28px] font-semibold text-gold">{pts(board.me.points)}</p>
-            <p className="text-[13px] text-paper-dim">points</p>
+            <p className="lb-stat lb-stat--accent">{pts(board.me.points)}</p>
+            <p className="lb-stat-label">points</p>
           </div>
           <div>
-            <p className="numeric text-[28px] font-semibold text-paper">{pts(board.me.pending)}</p>
-            <p className="text-[13px] text-paper-dim">pending</p>
+            <p className="lb-stat">{pts(board.me.pending)}</p>
+            <p className="lb-stat-label">pending</p>
           </div>
         </div>
-        <p className="mt-5 text-[13px] leading-relaxed text-paper-dim">{phase}</p>
+        <p className="lb-phase">{phase}</p>
       </div>
 
-      <details className="mt-4 rounded-2xl border border-ink-line px-5 py-4 text-[14px] leading-relaxed text-paper-dim">
-        <summary className="cursor-pointer text-paper">How points work</summary>
-        <p className="mt-3">
+      <details className="lb-how">
+        <summary>How points work</summary>
+        <p>
           Everyone who joins with your invite link is worth 1 point. Everyone they bring is worth
           0.5, the next level 0.25, and so on. A person counts once they record a session of at
           least 25 minutes.
         </p>
-        <p className="mt-2">
+        <p>
           Pending points are people who joined but haven&rsquo;t recorded 25 minutes yet. Ties go to
           whoever has more direct invites. The board updates every few minutes.
         </p>
       </details>
 
-      <div className="mt-8 flex items-baseline justify-between">
-        <h2 className="label text-[11px] text-paper-faint">All contestants</h2>
-        <p className="text-[12px] text-paper-faint">
-          {stale ? "Couldn't refresh · " : ""}updated {ago(board.refreshed_at, t)}
+      <div className="lb-list-head">
+        <h2 className="lb-label">All contestants</h2>
+        <p className="lb-updated">
+          {stale ? "Couldn\u2019t refresh · " : ""}updated {ago(board.refreshed_at, t)}
         </p>
       </div>
-      <ol className="mt-3 divide-y divide-ink-line rounded-2xl border border-ink-line">
+      <ol className="lb-list">
         {board.rows.map((row, i) => {
           const mine = i + 1 === board.me.position;
           return (
-            <li
-              key={i}
-              aria-current={mine ? "true" : undefined}
-              className={`numeric flex items-center gap-4 px-5 py-3 text-[15px] ${mine ? "bg-gold/10" : ""}`}
-            >
-              <span className="w-10 text-paper-dim">#{row.rank}</span>
-              <span className={`flex-1 ${mine ? "font-semibold text-gold" : "text-paper-faint"}`}>
-                {mine ? "You" : "Contestant"}
-              </span>
-              <span className={mine ? "font-semibold text-paper" : "text-paper"}>{pts(row.points)}</span>
-              <span className="w-24 text-right text-[13px] text-paper-faint">
-                {row.pending ? `+${pts(row.pending)} pending` : ""}
-              </span>
+            <li key={i} aria-current={mine ? "true" : undefined} className={mine ? "lb-row lb-row--me" : "lb-row"}>
+              <span className="lb-row-rank">#{row.rank}</span>
+              <span className="lb-row-who">{mine ? "You" : "Contestant"}</span>
+              <span className="lb-row-points">{pts(row.points)}</span>
+              <span className="lb-row-pending">{row.pending ? `+${pts(row.pending)} pending` : ""}</span>
             </li>
           );
         })}
       </ol>
 
       <button
+        className="lb-switch"
         onClick={() => {
           store.clear();
           username.current = null;
           setBoard(null);
           setInput("");
         }}
-        className="mt-8 self-center text-[13px] text-paper-faint underline-offset-4 hover:text-paper-dim hover:underline"
       >
         Not you? Use a different username
       </button>

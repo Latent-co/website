@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Wordmark from "@/components/ui/Wordmark";
 import Leaderboard from "./Leaderboard";
 
 export const metadata: Metadata = {
@@ -18,17 +16,21 @@ export const metadata: Metadata = {
  * marked. Everything comes from one call, `growth_challenge_view` in latent-frontend's
  * backend/supabase/migrations/20261111042000_growth_challenge_leaderboard.sql, which also
  * holds the scoring rule. The board refreshes there every 5 minutes.
+ *
+ * It wears the home page's look (leaderboard.css), not the rest of this Next app's.
  */
 export default function LeaderboardPage() {
   return (
-    <main className="mx-auto flex min-h-[100svh] max-w-xl flex-col px-5 pb-20 pt-10">
-      <header className="flex items-center justify-between">
-        <Link href="/" aria-label="Latent home">
-          <Wordmark size="text-xl" />
-        </Link>
-        <span className="label text-[11px] text-paper-faint">Growth challenge</span>
-      </header>
-      <Leaderboard />
-    </main>
+    <div className="lb">
+      <main className="lb-wrap">
+        <header className="lb-nav">
+          {/* A plain link: `/` is a rewrite to static HTML, so a Next <Link> prefetch 404s. */}
+          <a href="/" aria-label="Latent home">
+            <img src="/home/assets/img/wordmark.png" alt="Latent." width={82} height={24} />
+          </a>
+        </header>
+        <Leaderboard />
+      </main>
+    </div>
   );
 }

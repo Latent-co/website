@@ -1,0 +1,98 @@
+/* The leaderboard wears the home page's type and tokens (public/home/site.css, which mirrors the
+   app's Theme.swift), not the older Kalix/Inter of the rest of this Next app: Gambarino for the
+   title and the rank, the system sans for reading, Commit Mono for the numbers, natural letter
+   spacing, one butter accent for "you". Scoped under .lb so nothing else changes. */
+
+@font-face { font-family: "Gambarino"; src: url("/home/assets/fonts/Gambarino-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Commit Mono"; src: url("/home/assets/fonts/CommitMonoV143-400Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/home/assets/fonts/InstrumentSans-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/home/assets/fonts/InstrumentSans-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+
+.lb {
+  --bg: #0E0D0C;
+  --surface: #181614;
+  --control: #22201D;
+  --border: rgba(255, 255, 255, .08);
+  --paper: #F7F3EA;
+  --text-2: #B5B0A7;
+  --text-3: #6E6A64;
+  --accent: #E8C95F;
+  --serif: "Gambarino", "Iowan Old Style", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Instrument Sans", system-ui, sans-serif;
+  --mono: "Commit Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  font-feature-settings: normal;
+}
+.lb p, .lb h1, .lb h2, .lb ol { margin: 0; }
+.lb ::selection { background: var(--accent); color: #1A1508; }
+
+.lb-wrap { width: 100%; max-width: 600px; margin: 0 auto; padding: 18px 20px 96px; }
+.lb-nav { display: flex; align-items: center; justify-content: space-between; height: 44px; }
+.lb-nav img { height: 24px; width: auto; }
+
+.lb-label { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
+.lb-title { margin-top: 14px !important; font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 11vw, 64px); line-height: 1.04; letter-spacing: -.015em; }
+.lb-lede { margin-top: 14px !important; color: var(--text-2); font-size: 17px; line-height: 1.5; max-width: 30em; }
+
+/* ── the gate ───────────────────────────────────────── */
+.lb-gate { padding-top: clamp(56px, 12vh, 120px); }
+.lb-form { display: grid; gap: 10px; margin-top: 36px; }
+.lb-input {
+  height: 54px; width: 100%; padding: 0 18px; border-radius: 14px;
+  background: var(--control); color: var(--paper); border: 1px solid var(--border);
+  font: inherit; font-size: 17px; outline: none; transition: border-color .3s;
+}
+.lb-input::placeholder { color: var(--text-3); }
+.lb-input:focus { border-color: rgba(232, 201, 95, .55); }
+.lb-btn {
+  margin-top: 8px; height: 52px; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--paper); color: #050505; font: inherit; font-size: 16px; font-weight: 600;
+  transition: transform .35s var(--ease), opacity .3s;
+}
+.lb-btn:active { transform: scale(.985); opacity: .88; }
+.lb-btn:disabled { opacity: .4; cursor: default; }
+.lb-btn:focus-visible, .lb-switch:focus-visible, .lb-how summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.lb-note { margin-top: 6px !important; color: var(--text-2); font-size: 15px; line-height: 1.5; }
+
+/* ── the board ──────────────────────────────────────── */
+.lb-board { padding-top: 36px; }
+.lb-card { padding: 24px; border-radius: 20px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.lb-rank { margin-top: 10px !important; font-family: var(--serif); font-weight: 400; font-size: 64px; line-height: 1; letter-spacing: -.015em; }
+.lb-of { margin-left: 10px; font-family: var(--sans); font-size: 17px; letter-spacing: normal; color: var(--text-2); vertical-align: middle; }
+.lb-stats { display: flex; gap: 40px; margin-top: 22px; }
+.lb-stat { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 30px; line-height: 1.1; color: var(--paper); }
+.lb-stat--accent { color: var(--accent); }
+.lb-stat-label { margin-top: 4px !important; font-size: 14px; color: var(--text-2); }
+.lb-phase { margin-top: 20px !important; font-size: 15px; color: var(--text-2); }
+
+.lb-how { margin-top: 12px; padding: 16px 20px; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--border); color: var(--text-2); font-size: 15px; }
+.lb-how summary { cursor: pointer; color: var(--paper); font-weight: 600; }
+.lb-how p { margin-top: 10px; line-height: 1.55; }
+
+.lb-list-head { display: flex; align-items: baseline; justify-content: space-between; margin-top: 40px; }
+.lb-updated { font-size: 13px; color: var(--text-3); }
+.lb-list { list-style: none; padding: 0; margin-top: 12px !important; border-radius: 16px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--border); }
+.lb-row { display: grid; grid-template-columns: 52px 1fr auto 112px; align-items: center; gap: 12px; padding: 14px 20px; font-size: 16px; }
+.lb-row + .lb-row { border-top: 1px solid var(--border); }
+.lb-row-rank { font-family: var(--mono); font-size: 14px; color: var(--text-3); }
+.lb-row-who { color: var(--text-3); }
+.lb-row-points { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--paper); }
+.lb-row-pending { font-family: var(--mono); font-size: 12px; color: var(--text-3); text-align: right; }
+.lb-row--me { background: var(--surface); box-shadow: inset 2px 0 0 var(--accent); }
+.lb-row--me .lb-row-who { color: var(--accent); font-weight: 600; }
+.lb-row--me .lb-row-rank { color: var(--text-2); }
+
+.lb-switch { display: block; margin: 32px auto 0; background: none; border: 0; cursor: pointer; font: inherit; font-size: 14px; color: var(--text-3); }
+.lb-switch:hover { color: var(--text-2); text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 380px) {
+  .lb-row { grid-template-columns: 44px 1fr auto 96px; padding: 13px 16px; gap: 8px; }
+}

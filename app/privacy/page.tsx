@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: November 6, 2026
+          Effective Date: November 12, 2026
         </p>
 
         <p>
@@ -211,6 +211,27 @@ export default function PrivacyPolicy() {
           contacts only by others under 18 or by someone they already have a
           connection with on Latent.
         </p>
+        <h3>j. Feedback Surveys and Dictation</h3>
+        <p>
+          We may ask you to answer a short survey in the app about how Latent
+          works for you. Answering is optional. If you answer, we collect your
+          answers, including anything you write, and keep them with your
+          account. We also note when you were asked, which version of the
+          survey you saw, and basic information about your use of Latent at
+          that time, such as how long you have had your account and how many
+          days you have saved a session. The people who build Latent read your
+          answers to understand and improve the app. If you say you are open to
+          a call, we may message you in Latent to arrange one.
+        </p>
+        <p>
+          You can type your answers or tap Talk and say them. Talk uses
+          Apple&rsquo;s speech recognition on your device to turn what you say
+          into text. The recording is processed on your device, is not kept,
+          and is never sent to us or anyone else; only the text you choose to
+          keep is sent with your answer. The app asks for microphone and speech
+          recognition access only when you tap Talk, and you can turn either
+          off at any time in your device settings.
+        </p>
         <h2>2. How We Use Your Information</h2>
         <p>We may use the information we collect to:</p>
         <ul>
@@ -236,6 +257,10 @@ export default function PrivacyPolicy() {
             technical problems
           </li>
           <li>Analyze Platform usage and develop new features</li>
+          <li>
+            Ask for your feedback through optional surveys, and contact you about
+            a call if you tell us you are open to one
+          </li>
           <li>Show and measure ads, and promote Latent</li>
           <li>Comply with applicable laws and legal obligations</li>
         </ul>
@@ -372,6 +397,9 @@ export default function PrivacyPolicy() {
           we check them. A phone number you confirm stays on your account until
           you remove it or delete your account.
         </p>
+        <p>
+          Survey answers stay with your account until you delete your account.
+        </p>
         <h2>7. Security</h2>
         <p>
           We use reasonable administrative, technical, and organizational
@@ -409,8 +437,9 @@ export default function PrivacyPolicy() {
           <li>Remove your phone number in the app from Edit profile</li>
         </ul>
         <p>
-          You may also control certain permissions, including camera and contacts
-          access, through your device settings.
+          You may also control certain permissions, including camera, contacts,
+          microphone, and speech recognition access, through your device
+          settings.
         </p>
         <p>
           To exercise applicable privacy rights, contact us at{" "}
@@ -450,6 +479,10 @@ export default function PrivacyPolicy() {
           <li>PostHog: product analytics</li>
           <li>Sentry: crash reports and app performance</li>
           <li>Apple and Google: sign-in and push notifications</li>
+          <li>
+            Apple: speech recognition when you use Talk in a survey, which runs on
+            your device
+          </li>
           <li>Google Firebase: confirming a phone number you add</li>
           <li>
             A text-messaging provider: delivering access texts to people on the

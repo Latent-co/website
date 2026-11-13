@@ -258,6 +258,13 @@ export default function PrivacyPolicy() {
           </li>
           <li>Analyze Platform usage and develop new features</li>
           <li>
+            Build features from combined, anonymous counts. For example, we count
+            which songs are used most on posts shared with friends to make
+            Latent&rsquo;s Trending and Recommended song lists. These lists show
+            songs only, never who posted them, and a song appears only after at
+            least 10 people have used it.
+          </li>
+          <li>
             Ask for your feedback through optional surveys, and contact you about
             a call if you tell us you are open to one
           </li>

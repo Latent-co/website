@@ -65,21 +65,27 @@ export default function GetLatent({ code }: { code: string | null }) {
   // on both events here and on the copied link (`?v=`), where the app reads it back, so a
   // page visit can be joined to the install it led to: nothing else survives the App Store.
   const visit = useRef<string>("");
+  const browser = useRef<string>("none");
+  // A second tap while the store is opening is the same attempt, not another one.
+  const leaving = useRef(false);
 
   useEffect(() => {
-    visit.current = newVisitId();
-    track("invite_page_viewed", {
-      code,
-      has_code: code !== null,
-      visit_id: visit.current,
-      in_app_browser: inAppBrowser(navigator.userAgent),
-    });
+    if (!visit.current) visit.current = newVisitId();
+    browser.current = inAppBrowser(navigator.userAgent);
+    track(
+      "invite_page_viewed",
+      { code, has_code: code !== null, visit_id: visit.current, in_app_browser: browser.current },
+      { instant: true },
+    );
   }, [code]);
 
   async function get() {
+    if (leaving.current) return;
+    leaving.current = true;
+    setTimeout(() => (leaving.current = false), 2000);
+    // Set by the effect; a tap that somehow beats it mints the id the effect will then keep.
     if (!visit.current) visit.current = newVisitId();
-    const link = `https://trylatent.co/i/${code}?v=${visit.current}`;
-    const method = code ? await copy(link) : null;
+    const method = code ? await copy(`https://trylatent.co/i/${code}?v=${visit.current}`) : null;
     trackBeforeLeaving(
       "invite_get_tapped",
       {
@@ -87,7 +93,7 @@ export default function GetLatent({ code }: { code: string | null }) {
         visit_id: visit.current,
         copied: method !== null && method !== "failed",
         copy_method: method ?? "no_code",
-        in_app_browser: inAppBrowser(navigator.userAgent),
+        in_app_browser: browser.current,
       },
       visit.current,
     );

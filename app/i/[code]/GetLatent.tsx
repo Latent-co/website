@@ -65,12 +65,19 @@ export default function GetLatent({ code }: { code: string | null }) {
   // on both events here and on the copied link (`?v=`), where the app reads it back, so a
   // page visit can be joined to the install it led to: nothing else survives the App Store.
   const visit = useRef<string>("");
+  const visitCode = useRef<string | null>(null);
   const browser = useRef<string>("none");
-  // A second tap while the store is opening is the same attempt, not another one.
-  const leaving = useRef(false);
+  // When Get Latent was last tapped. A second tap while the store is still opening is the same
+  // attempt: it navigates again (an in-app browser may have swallowed the first), but is not
+  // copied or counted again. A time, not a timer, so a tab frozen mid-wait cannot jam it.
+  const lastTap = useRef(0);
 
   useEffect(() => {
-    if (!visit.current) visit.current = newVisitId();
+    // A new code is a new invite: its own visit, never another code's.
+    if (!visit.current || visitCode.current !== code) {
+      visit.current = newVisitId();
+      visitCode.current = code;
+    }
     browser.current = inAppBrowser(navigator.userAgent);
     track(
       "invite_page_viewed",
@@ -80,23 +87,23 @@ export default function GetLatent({ code }: { code: string | null }) {
   }, [code]);
 
   async function get() {
-    if (leaving.current) return;
-    leaving.current = true;
-    setTimeout(() => (leaving.current = false), 2000);
-    // Set by the effect; a tap that somehow beats it mints the id the effect will then keep.
-    if (!visit.current) visit.current = newVisitId();
-    const method = code ? await copy(`https://trylatent.co/i/${code}?v=${visit.current}`) : null;
-    trackBeforeLeaving(
-      "invite_get_tapped",
-      {
-        code,
-        visit_id: visit.current,
-        copied: method !== null && method !== "failed",
-        copy_method: method ?? "no_code",
-        in_app_browser: browser.current,
-      },
-      visit.current,
-    );
+    const now = Date.now();
+    const repeat = now - lastTap.current < 2000;
+    lastTap.current = now;
+    if (!repeat) {
+      const method = code ? await copy(`https://trylatent.co/i/${code}?v=${visit.current}`) : null;
+      trackBeforeLeaving(
+        "invite_get_tapped",
+        {
+          code,
+          visit_id: visit.current,
+          copied: method !== null && method !== "failed",
+          copy_method: method ?? "no_code",
+          in_app_browser: browser.current,
+        },
+        visit.current,
+      );
+    }
     window.location.href = STORE_URL;
   }
 

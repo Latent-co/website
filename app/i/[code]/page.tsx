@@ -10,7 +10,8 @@ import GetLatent from "./GetLatent";
  * app only reads a six-character code from a URL, so a hand-picked code of any other length
  * (LARPY) opens the app with nothing.
  * Without the app, Apple carries nothing through an install, so the one button copies this
- * link before opening the store and the person pastes it at the app's invite screen.
+ * link (plus `?v=<visit id>`, which joins this visit to the install in PostHog) before opening
+ * the store and the person pastes it at the app's invite screen.
  * That button is the whole page, because a browser only lets a page copy on a tap.
  */
 type Props = { params: { code: string } };

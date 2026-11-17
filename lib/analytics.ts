@@ -45,3 +45,38 @@ export function track(event: string, props?: Record<string, unknown>) {
   if (ph) ph.capture(event, props);
   else queue.push([event, props]);
 }
+
+/**
+ * An event raised right before the page is left for another app (a tap that opens the App
+ * Store), which `track`'s queue could lose: it goes by beacon, which the browser finishes
+ * after the page is gone. If the library has not loaded yet (a tap in the first second), the
+ * beacon goes straight to PostHog's capture endpoint through /ingest as an anonymous event,
+ * keyed on `anonId` and making no person profile, the same as the library would for an
+ * anonymous visitor.
+ */
+export function trackBeforeLeaving(event: string, props: Record<string, unknown>, anonId: string) {
+  if (ph) {
+    ph.capture(event, props, { send_instantly: true, transport: "sendBeacon" });
+    return;
+  }
+  startAnalytics();
+  const body = JSON.stringify({
+    api_key: KEY,
+    event,
+    distinct_id: anonId,
+    properties: {
+      ...props,
+      surface: "website",
+      $current_url: window.location.href,
+      $process_person_profile: false,
+    },
+  });
+  const url = "/ingest/i/v0/e/";
+  const sent =
+    typeof navigator.sendBeacon === "function" &&
+    navigator.sendBeacon(url, new Blob([body], { type: "application/json" }));
+  if (!sent) {
+    fetch(url, { method: "POST", body, keepalive: true, headers: { "Content-Type": "application/json" } })
+      .catch(() => {});
+  }
+}

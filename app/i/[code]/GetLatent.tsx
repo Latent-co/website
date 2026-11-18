@@ -17,7 +17,12 @@ type CopyMethod = "clipboard_api" | "exec_command" | "failed";
  */
 async function copy(text: string): Promise<CopyMethod> {
   try {
-    await navigator.clipboard.writeText(text);
+    // Some in-app webviews leave this promise pending forever; past half a second it counts as
+    // a failure and the fallback runs, so the tap still copies, counts and opens the store.
+    await Promise.race([
+      navigator.clipboard.writeText(text),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("clipboard timeout")), 500)),
+    ]);
     return "clipboard_api";
   } catch {}
   const field = document.createElement("textarea");
@@ -84,19 +89,23 @@ export default function GetLatent({ code }: { code: string | null }) {
   // Every tap copies, counts and opens the store: an in-app browser may swallow the first. A
   // double tap is two invite_get_tapped events with one visit_id, so count visits, not taps.
   async function get() {
-    const method = code ? await copy(`https://trylatent.co/i/${code}?v=${visit.current}`) : null;
-    trackBeforeLeaving(
-      "invite_get_tapped",
-      {
-        code,
-        visit_id: visit.current,
-        copied: method !== null && method !== "failed",
-        copy_method: method ?? "no_code",
-        in_app_browser: browser.current,
-      },
-      visit.current,
-    );
-    window.location.href = STORE_URL;
+    try {
+      const method = code ? await copy(`https://trylatent.co/i/${code}?v=${visit.current}`) : null;
+      trackBeforeLeaving(
+        "invite_get_tapped",
+        {
+          code,
+          visit_id: visit.current,
+          copied: method !== null && method !== "failed",
+          copy_method: method ?? "no_code",
+          in_app_browser: browser.current,
+        },
+        visit.current,
+      );
+    } finally {
+      // Whatever the copy or the analytics did, the button's job is the store.
+      window.location.href = STORE_URL;
+    }
   }
 
   return (

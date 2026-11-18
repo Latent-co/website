@@ -67,11 +67,6 @@ export default function GetLatent({ code }: { code: string | null }) {
   const visit = useRef<string>("");
   const visitCode = useRef<string | null>(null);
   const browser = useRef<string>("none");
-  // When Get Latent was last tapped. A second tap while the store is still opening is the same
-  // attempt: it navigates again (an in-app browser may have swallowed the first), but is not
-  // copied or counted again. A time, not a timer, so a tab frozen mid-wait cannot jam it.
-  const lastTap = useRef(0);
-
   useEffect(() => {
     // A new code is a new invite: its own visit, never another code's.
     if (!visit.current || visitCode.current !== code) {
@@ -86,24 +81,21 @@ export default function GetLatent({ code }: { code: string | null }) {
     );
   }, [code]);
 
+  // Every tap copies, counts and opens the store: an in-app browser may swallow the first. A
+  // double tap is two invite_get_tapped events with one visit_id, so count visits, not taps.
   async function get() {
-    const now = Date.now();
-    const repeat = now - lastTap.current < 2000;
-    lastTap.current = now;
-    if (!repeat) {
-      const method = code ? await copy(`https://trylatent.co/i/${code}?v=${visit.current}`) : null;
-      trackBeforeLeaving(
-        "invite_get_tapped",
-        {
-          code,
-          visit_id: visit.current,
-          copied: method !== null && method !== "failed",
-          copy_method: method ?? "no_code",
-          in_app_browser: browser.current,
-        },
-        visit.current,
-      );
-    }
+    const method = code ? await copy(`https://trylatent.co/i/${code}?v=${visit.current}`) : null;
+    trackBeforeLeaving(
+      "invite_get_tapped",
+      {
+        code,
+        visit_id: visit.current,
+        copied: method !== null && method !== "failed",
+        copy_method: method ?? "no_code",
+        in_app_browser: browser.current,
+      },
+      visit.current,
+    );
     window.location.href = STORE_URL;
   }
 

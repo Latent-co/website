@@ -16,8 +16,7 @@ const KEY = "phc_w2xVV6e3WJvuwyak7AwKc69SHWE6UzAXK9eiAjnYvWME";
 let started = false;
 let ph: PostHog | null = null;
 type Opts = { instant?: boolean };
-// Each waiting event keeps the moment it was raised: a beacon sent later must not reorder it.
-const queue: [string, Record<string, unknown> | undefined, Opts | undefined, Date][] = [];
+const queue: [string, Record<string, unknown> | undefined, Opts | undefined][] = [];
 const captureOptions = (o?: Opts) => (o?.instant ? { send_instantly: true } : undefined);
 
 // The library (~100 KB) loads after the page, so the signup form isn't slower for it;
@@ -37,7 +36,7 @@ export function startAnalytics() {
     });
     posthog.register({ surface: "website" });
     ph = posthog;
-    queue.splice(0).forEach(([e, p, o, at]) => posthog.capture(e, p, { ...captureOptions(o), timestamp: at }));
+    queue.splice(0).forEach(([e, p, o]) => posthog.capture(e, p, captureOptions(o)));
   });
 }
 
@@ -47,7 +46,7 @@ export function startAnalytics() {
 export function track(event: string, props?: Record<string, unknown>, opts?: Opts) {
   startAnalytics();
   if (ph) ph.capture(event, props, captureOptions(opts));
-  else queue.push([event, props, opts, new Date()]);
+  else queue.push([event, props, opts]);
 }
 
 /**
@@ -60,7 +59,7 @@ export function track(event: string, props?: Record<string, unknown>, opts?: Opt
 // TRADEOFF: events sent before the library loads (the tap, and the page view still waiting with
 // it) carry `anonId` as their distinct_id and none of the library's automatic properties ($os,
 // $browser, $session_id); `visit_id`, which both paths carry, is the join. Upgrade: bootstrap
-// the library's distinct id with the visit id on this page, and send one ordered batch.
+// the library's distinct id with the visit id on this page.
 export function trackBeforeLeaving(event: string, props: Record<string, unknown>, anonId: string) {
   if (ph) {
     ph.capture(event, props, { send_instantly: true, transport: "sendBeacon" });
@@ -69,16 +68,15 @@ export function trackBeforeLeaving(event: string, props: Record<string, unknown>
   startAnalytics();
   // Taken out of the queue, so the library cannot send them a second time if the page survives.
   const waiting = queue.splice(0);
-  for (const [e, p, , at] of waiting) beacon(e, p ?? {}, anonId, at);
-  beacon(event, props, anonId, new Date());
+  for (const [e, p] of waiting) beacon(e, p ?? {}, anonId);
+  beacon(event, props, anonId);
 }
 
-function beacon(event: string, props: Record<string, unknown>, anonId: string, at: Date) {
+function beacon(event: string, props: Record<string, unknown>, anonId: string) {
   const body = JSON.stringify({
     api_key: KEY,
     event,
     distinct_id: anonId,
-    timestamp: at.toISOString(),
     properties: {
       ...props,
       surface: "website",

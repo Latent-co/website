@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           Latent Privacy Policy
         </h1>
         <p className="mt-4 text-sm uppercase tracking-[0.14em] text-paper-faint">
-          Effective Date: November 12, 2026
+          Effective Date: November 18, 2026
         </p>
 
         <p>
@@ -394,9 +394,14 @@ export default function PrivacyPolicy() {
           may delete, anonymize, or otherwise de-identify it.
         </p>
         <p>
-          When you delete content, such as a session or a message you sent, we
-          remove it from the Platform. Deleted information may remain in our
-          backups for up to 30 days before it is permanently erased.
+          When you delete a session, it moves to Recently deleted for 30 days.
+          Only you can see it there, and you can restore it or delete it
+          permanently. After 30 days it is permanently deleted.
+        </p>
+        <p>
+          When you delete other content, such as a message you sent, we remove it
+          from the Platform. Once any content is gone from the Platform, copies
+          may remain in our backups for up to 30 days before they are erased.
         </p>
 
         <p>
